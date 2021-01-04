@@ -6,6 +6,16 @@
     android:layout_height="match_parent"
     tools:context=".ListOfListsActivity">
 
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/listOfListsRecyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/newListButton"
         android:layout_width="wrap_content"
