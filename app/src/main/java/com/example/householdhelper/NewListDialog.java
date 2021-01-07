@@ -4,6 +4,7 @@ import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Context;
 import android.os.Bundle;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.EditText;
@@ -32,6 +33,14 @@ public class NewListDialog extends AppCompatDialogFragment {
                 });
 
         editTextListName = view.findViewById(R.id.edit_listname);
+        editTextListName.setOnKeyListener((v, keyCode, event) -> {
+            if (keyCode == KeyEvent.KEYCODE_ENTER) {
+                String name = editTextListName.getText().toString();
+                listener.createNewList(name);
+                return true;
+            }
+            return false;
+        });
 
         return builder.create();
     }

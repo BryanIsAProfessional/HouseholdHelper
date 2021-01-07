@@ -9,6 +9,7 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.util.Log;
+import android.widget.Toast;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
@@ -113,9 +114,17 @@ public class ListOfListsActivity extends AppCompatActivity implements NewListDia
     }
 
     public void createNewList(String name){
-        Log.d(TAG, "createNewList: started");
-        db.insertList(name);
-        openList(name);
+        if(!name.isEmpty()) {
+            Log.d(TAG, "createNewList: started");
+            try {
+                db.insertList(name);
+            } catch (Exception e) {
+                Log.d(TAG, "Error: " + e.toString());
+            }
+            openList(name);
+        }else{
+            Toast.makeText(getBaseContext(), "Enter a name for your list", Toast.LENGTH_SHORT).show();
+        }
     }
 
     public void deleteList(String name, int position){

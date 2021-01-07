@@ -39,27 +39,24 @@ public class MainActivity extends AppCompatActivity {
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawerLayout, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawerLayout.addDrawerListener(toggle);
         toggle.syncState();
-        navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
-            @Override
-            public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
-                switch (menuItem.getItemId()) {
-                    case R.id.nav_schedule:
-                        Toast.makeText(getBaseContext(), "Schedule is not implemented yet", Toast.LENGTH_SHORT).show();
-                        break;
-                    case R.id.nav_recipes:
-                        Toast.makeText(getBaseContext(), "Recipes are not implemented yet", Toast.LENGTH_SHORT).show();
-                        break;
-                    case R.id.nav_lists:
-                        Intent intent = new Intent(getApplicationContext(), ListOfListsActivity.class);
-                        startActivity(intent);
-                        break;
-                    case R.id.nav_settings:
-                        Toast.makeText(getBaseContext(), "Settings are not implemented yet", Toast.LENGTH_SHORT).show();
-                        break;
-                }
-                drawerLayout.closeDrawer(GravityCompat.START);
-                return true;
+        navigationView.setNavigationItemSelectedListener(menuItem -> {
+            switch (menuItem.getItemId()) {
+                case R.id.nav_schedule:
+                    Toast.makeText(getBaseContext(), "Schedule is not implemented yet", Toast.LENGTH_SHORT).show();
+                    break;
+                case R.id.nav_recipes:
+                    Toast.makeText(getBaseContext(), "Recipes are not implemented yet", Toast.LENGTH_SHORT).show();
+                    break;
+                case R.id.nav_lists:
+                    Intent intent = new Intent(getApplicationContext(), ListOfListsActivity.class);
+                    startActivity(intent);
+                    break;
+                case R.id.nav_settings:
+                    Toast.makeText(getBaseContext(), "Settings are not implemented yet", Toast.LENGTH_SHORT).show();
+                    break;
             }
+            drawerLayout.closeDrawer(GravityCompat.START);
+            return true;
         });
     }
 

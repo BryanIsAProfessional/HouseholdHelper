@@ -4,7 +4,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
-import android.widget.ImageButton;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -23,12 +22,16 @@ public class ListItemsAdapter extends RecyclerView.Adapter<ListItemsAdapter.List
         public ListsAdapterViewHolder(View itemView){
             super(itemView);
             checkBox = itemView.findViewById(R.id.checkBox);
-            listName = itemView.findViewById(R.id.listItemName);
+            listName = itemView.findViewById(R.id.quickAddItemName);
         }
     }
 
     public ListItemsAdapter(ArrayList<ListItem> inList){
         list = inList;
+    }
+
+    public ListItem getItem(int position){
+        return list.get(position);
     }
 
     @Override

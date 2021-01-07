@@ -5,6 +5,7 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.util.Log;
 
 import androidx.annotation.Nullable;
 
@@ -192,6 +193,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     }
 
     public String insertQuickAddItem(String name){
+        Log.d(TAG, "insertQuickAddItem: inserting " + name);
         SQLiteDatabase db = getWritableDatabase();
         String now = getTime();
 
@@ -213,12 +215,13 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             values.put(LISTS_TABLE_COLS[2], ret.getString(ret.getColumnIndex(LISTS_TABLE_COLS[2])));
             values.put(LISTS_TABLE_COLS[3], last_modified);
 
-            return String.valueOf(db.insert(LISTS_TABLE, null, values));
+            return String.valueOf(db.update(LISTS_TABLE, values, "id = ?", new String[]{ret.getString(ret.getColumnIndex(LISTS_TABLE_COLS[0]))}));
         }
         return "-1";
     }
 
     public String updateListItem(String id, String name, String state, String recipe_item_id){
+        Log.d(TAG, "updateListItem: started");
         SQLiteDatabase db = getWritableDatabase();
         Cursor ret = getListItemById(id);
         if(ret.moveToFirst()){
@@ -229,8 +232,11 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             values.put(LIST_ITEMS_TABLE_COLS[3], state);
             values.put(LIST_ITEMS_TABLE_COLS[4], recipe_item_id);
 
-            return String.valueOf(db.insert(LIST_ITEMS_TABLE, null, values));
+            String returning = String.valueOf(db.update(LIST_ITEMS_TABLE, values, "id = ?", new String[]{id}));
+            Log.d(TAG, "updateListItem: returning " + returning);
+            return returning;
         }
+        Log.d(TAG, "updateListItem: returning -1");
         return "-1";
     }
 
@@ -245,7 +251,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             values.put(MEASUREMENT_TABLE_COLS[3], measurement_type_id);
             values.put(MEASUREMENT_TABLE_COLS[4], amount);
 
-            return String.valueOf(db.insert(MEASUREMENTS_TABLE, null, values));
+            return String.valueOf(db.update(MEASUREMENTS_TABLE, values, "where id = ?", new String[]{id}));
         }
         return "-1";
     }
@@ -503,7 +509,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         SQLiteDatabase db = getWritableDatabase();
 
         // delete measurements referencing this id
-        Cursor ret = db.rawQuery("delete from " + MEASUREMENTS_TABLE + " where " + MEASUREMENT_TABLE_COLS[1] + " = " + Table.LIST.name() + " and " + MEASUREMENT_TABLE_COLS[2] + " = ?", new String[]{id});
+        Cursor ret = db.rawQuery("delete from " + MEASUREMENTS_TABLE + " where " + MEASUREMENT_TABLE_COLS[1] + " = ?" + " and " + MEASUREMENT_TABLE_COLS[2] + " = ?", new String[]{Table.LIST.name(),id});
 
         ret.close();
 

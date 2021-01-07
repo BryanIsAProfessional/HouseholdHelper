@@ -34,7 +34,7 @@ public class ListsAdapter extends RecyclerView.Adapter<ListsAdapter.ListsAdapter
         public ListsAdapterViewHolder(View itemView, OnItemClickListener listener){
             super(itemView);
 
-            listName = itemView.findViewById(R.id.listItemName);
+            listName = itemView.findViewById(R.id.quickAddItemName);
             deleteButton = itemView.findViewById(R.id.deleteButton);
             itemView.setOnClickListener(v->listener.onItemClick(getAdapterPosition()));
             deleteButton.setOnClickListener(v-> {
