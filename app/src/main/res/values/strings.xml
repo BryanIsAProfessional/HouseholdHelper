@@ -2,8 +2,6 @@
     <string name="app_name">Household Helper</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
-    <string name="nav_header_title">Android Studio</string>
-    <string name="nav_header_subtitle">android.studio@android.com</string>
     <string name="nav_header_desc">Navigation header</string>
     <string name="action_settings">Settings</string>
 
@@ -11,31 +9,77 @@
     <string name="menu_recipes">Recipes</string>
     <string name="menu_lists">Lists</string>
     <string name="menu_settings">Settings</string>
+
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="title_activity_lists">ListsActivity</string>
+    <string name="title_activity_lists">Lists</string>
+    <string name="title_activity_recipes">Recipes</string>
+    <string name="title_recipe_gallery">Gallery</string>
+    <string name="title_recipe_book">Recipe Book</string>
+    <string name="title_activity_schedule">Schedule</string>
+
+
     <!-- Strings used for fragments for navigation -->
     <string name="first_fragment_label">First Fragment</string>
     <string name="second_fragment_label">Second Fragment</string>
-    <string name="next">Next</string>
-    <string name="previous">Previous</string>
+    <string name="recipes_fragment_label">Recipe Book</string>
+    <string name="recipe_fragment_label">Recipe</string>
 
-    <string name="hello_first_fragment">Hello first fragment</string>
-    <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
-    <string name="title_activity_settings">SettingsActivity</string>
 
-    <!-- Preference Titles -->
-    <string name="messages_header">Messages</string>
-    <string name="sync_header">Sync</string>
+    <string name="title_activity_settings">Settings</string>
 
-    <!-- Messages Preferences -->
-    <string name="signature_title">Your signature</string>
-    <string name="reply_title">Default reply action</string>
+    <string name="shopping_list">Shopping List</string>
+    <string name="todo_list">ToDo List</string>
 
-    <!-- Sync Preferences -->
-    <string name="sync_title">Sync email periodically</string>
-    <string name="attachment_title">Download incoming attachments</string>
-    <string name="attachment_summary_on">Automatically download attachments for incoming emails
-    </string>
-    <string name="attachment_summary_off">Only download attachments when manually requested</string>
+    <!-- Settings -->
+    <string name="profile_settings_header">Profile</string>
+    <string name="name_title">Name</string>
+    <string name="birthday_title">Birth Date</string>
+    <string name="title_recipes">Recipes</string>
+    <string name="title_gallery">Gallery</string>
+
+    <!-- Incidental Strings -->
+    <string name="new_med_dialog_1">I take this</string>
+    <string name="new_med_dialog_2"> times a </string>
+    <string name="new_med_dialog_3">My prescriptions contain</string>
+    <string name="new_med_dialog_4">doses</string>
+    <string name="new_med_dialog_5">Notify me</string>
+    <string name="new_med_dialog_6">days before I run out</string>
+    <string name="recipe_1">Recipe Title</string>
+    <string name="recipe_2">Touch here to add an image</string>
+    <string name="recipe_3">Prep Time:</string>
+    <string name="recipe_4"> Minutes</string>
+    <string name="recipe_5">Author: </string>
+    <string name="recipe_6">Cook Time:</string>
+    <string name="recipe_7">Serves: </string>
+    <string name="recipe_8">Total Time: </string>
+    <string name="recipe_9">15</string>
+    <string name="recipe_10">you</string>
+    <string name="recipe_11">30</string>
+    <string name="recipe_12">2</string>
+    <string name="recipe_13">Recipe Title</string>
+    <string name="recipe_14">Image of the recipe</string>
+    <string name="recipe_15">add category</string>
+
+    <string name="add_list_button_description">add new list button</string>
+    <string name="gallery_image_content_description">recipe image</string>
+
+    <string name="welcome_text">Welcome to Household Helper</string>
+
+    <string name="batch_add_text">type here..</string>
+    <string name="batch_add_text_1">Also add to Quick Add?</string>
+    <string name="batch_add_text_2">Submit</string>
+    <string name="batch_add_text_3">Clear</string>
+    <string name="batch_add_text_4">Batch Add</string>
+    <string name="batch_add_text_5">Quick Add</string>
+
+    <string name="prescription_tracker_header">Prescription Tracker</string>
+    <string name="button_text_back">back</string>
+
+    <string name="recipe_name_placeholder">new recipe</string>
+    <string name="recipe_name">Recipe Name</string>
+    <string name="servings">servings</string>
+    <string name="author">author</string>
+    <string name="cook_time">cook time</string>
+
 </resources>

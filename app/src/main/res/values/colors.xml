@@ -1,10 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <!-- can't remove rn -->
     <color name="purple_200">#FFBB86FC</color>
     <color name="purple_500">#FF6200EE</color>
     <color name="purple_700">#FF3700B3</color>
     <color name="teal_200">#FF03DAC5</color>
     <color name="teal_700">#FF018786</color>
+
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+
+    <!-- Default Theme Colors -->
+    <color name="default_primary">#31515C</color>
+    <color name="default_secondary">#FFA101</color>
+    <color name="default_secondary_variant">#B3DEE5</color>
+
+    <!-- Beach Theme Colors -->
+    <color name="sunset_primary">#F67280</color>
+    <color name="sunset_secondary">#00a3cc</color>
+    <color name="sunset_secondary_variant">#B3DEE5</color>
+    <!-- Dark Theme Colors -->
+    <color name="dark_primary">#121212</color>
+    <color name="dark_secondary">#7E57C2</color>
+    <color name="dark_secondary_variant">#BFBFBF</color>
+    <color name="dark_text">#FFFFFF</color>
+    <color name="dark_background">#3C3C3C</color>
+
 </resources>

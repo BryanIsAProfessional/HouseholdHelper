@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/constraintLayout6"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <!-- TODO: Update blank fragment layout -->
+
+    <TextView
+        android:id="@+id/medicineNameTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="Medicine Name"
+        android:textSize="@dimen/title_large_font_size"
+        app:layout_constraintStart_toStartOf="@+id/removePillImageButton"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageButton
+        android:id="@+id/addPillImageButton"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:contentDescription="add pill "
+        android:scaleType="fitXY"
+        app:layout_constraintBottom_toBottomOf="@+id/pillsRecyclerView"
+        app:layout_constraintStart_toEndOf="@+id/pillsRecyclerView"
+        app:layout_constraintTop_toTopOf="@+id/pillsRecyclerView"
+        app:srcCompat="@drawable/ic_menu_add" />
+
+    <ImageButton
+        android:id="@+id/removePillImageButton"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:contentDescription="remove pill"
+        android:scaleType="fitXY"
+        app:layout_constraintBottom_toBottomOf="@+id/pillsRecyclerView"
+        app:layout_constraintEnd_toStartOf="@+id/pillsRecyclerView"
+        app:layout_constraintTop_toTopOf="@+id/pillsRecyclerView"
+        app:srcCompat="@drawable/ic_baseline_remove_24" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/pillsRecyclerView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/autoToggle">
+
+    </androidx.recyclerview.widget.RecyclerView>
+
+    <ToggleButton
+        android:id="@+id/autoToggle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:checked="false"
+        android:contentDescription="automatic tracking"
+        android:text="ToggleButton"
+        android:textOff="Manual"
+        android:textOn="Auto"
+        android:textSize="@dimen/title_small_font_size"
+        app:layout_constraintEnd_toEndOf="@+id/addPillImageButton"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/refillButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Refill"
+        app:layout_constraintBottom_toBottomOf="@+id/pillsRecyclerView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/pillsRecyclerView"
+        tools:visibility="gone" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

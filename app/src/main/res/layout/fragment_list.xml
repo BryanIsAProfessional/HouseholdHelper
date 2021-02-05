@@ -4,13 +4,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ListFragment">
+    tools:context=".lists.ListFragment">
 
     <LinearLayout
         android:id="@+id/batchAddLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:gravity="right"
+        android:background="?colorSecondaryVariant"
+        android:gravity="end"
         android:orientation="vertical"
         android:visibility="gone"
         app:layout_constraintEnd_toEndOf="parent"
@@ -22,12 +23,14 @@
             android:id="@+id/newItemNameEditText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:ems="10"
-            android:hint="type here.."
-            android:layout_marginTop="16dp"
             android:layout_marginLeft="16dp"
+            android:layout_marginTop="16dp"
             android:layout_marginRight="16dp"
-            android:inputType="textPersonName" />
+            android:autofillHints=""
+            android:ems="10"
+            android:hint="@string/batch_add_text"
+            android:inputType="textPersonName"
+            android:textSize="@dimen/title_large_font_size" />
 
         <LinearLayout
             android:id="@+id/batchAddEditLayout"
@@ -41,17 +44,20 @@
                 android:id="@+id/newItemCheckBox"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Also add to Quick Add?"
                 android:layout_marginLeft="16dp"
-                android:layout_marginRight="32dp"/>
+                android:layout_marginRight="32dp"
+                android:text="@string/batch_add_text_1"
+                android:textSize="@dimen/title_medium_font_size" />
 
             <Button
                 android:id="@+id/submitButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Submit"
+                android:layout_marginStart="32dp"
                 android:layout_marginLeft="32dp"
-                android:layout_marginRight="16dp"/>
+                android:layout_marginRight="16dp"
+                android:contentDescription="submit"
+                android:text="@string/batch_add_text_2" />
 
         </LinearLayout>
 
@@ -61,47 +67,45 @@
         android:id="@+id/scrollView2"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        app:layout_constraintBottom_toTopOf="@+id/dividerLinearLayout"
+        app:layout_constraintBottom_toBottomOf="@+id/constraintLayout2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/batchAddLayout">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:gravity="center"
             android:orientation="vertical">
 
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/listRecyclerView"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-
-            </androidx.recyclerview.widget.RecyclerView>
-
-            <LinearLayout
-                android:id="@+id/dividerLinearLayout2"
+            <androidx.core.widget.NestedScrollView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:gravity="right"
-                android:orientation="horizontal"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.5"
-                app:layout_constraintStart_toStartOf="parent">
+                android:fillViewport="true">
 
-                <Button
-                    android:id="@+id/clearButton"
-                    android:layout_width="wrap_content"
+                <LinearLayout
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginRight="32dp"
-                    android:text="Clear" />
+                    android:gravity="center"
+                    android:orientation="vertical">
 
-            </LinearLayout>
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/listRecyclerView"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
 
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/crossedListRecyclerView"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                    </androidx.recyclerview.widget.RecyclerView>
 
-            </androidx.recyclerview.widget.RecyclerView>
+                    <Button
+                        android:id="@+id/clearButton"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:contentDescription="clear checked items"
+                        android:text="@string/batch_add_text_3" />
+
+                </LinearLayout>
+            </androidx.core.widget.NestedScrollView>
 
         </LinearLayout>
     </ScrollView>
@@ -110,32 +114,46 @@
         android:id="@+id/dividerLinearLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:gravity="right"
         android:orientation="horizontal"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent">
 
-        <Button
-            android:id="@+id/crossOffButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="Cross Off" />
-
-        <Button
-            android:id="@+id/batchAddButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Batch Add" />
-
-        <Button
-            android:id="@+id/quickAddButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Quick Add" />
-
     </LinearLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraintLayout2"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:layout_marginRight="8dp"
+            android:layout_marginBottom="8dp"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent">
+
+            <Button
+                android:id="@+id/batchAddButton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:contentDescription="open batch add"
+                android:text="@string/batch_add_text_4" />
+
+            <Button
+                android:id="@+id/quickAddButton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:contentDescription="open quick add"
+                android:text="Quick add"
+                android:textColor="?colorOnPrimary" />
+        </LinearLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

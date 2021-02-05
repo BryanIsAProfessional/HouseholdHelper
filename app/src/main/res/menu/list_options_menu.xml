@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/setShoppingList"
+        android:title="Mark as Shopping List" />
+
+    <item
+        android:id="@+id/setToDoList"
+        android:title="Mark as To-Do List" />
+
+</menu>

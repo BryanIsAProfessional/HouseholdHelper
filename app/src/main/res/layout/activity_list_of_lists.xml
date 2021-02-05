@@ -4,12 +4,13 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ListOfListsActivity">
+    tools:context=".lists.ListOfListsActivity">
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/listOfListsRecyclerView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:contentDescription="lists"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
@@ -24,8 +25,10 @@
         android:layout_marginRight="24dp"
         android:layout_marginBottom="24dp"
         android:clickable="true"
+        android:contentDescription="@string/add_list_button_description"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:srcCompat="@android:drawable/ic_menu_add" />
+        app:srcCompat="@drawable/ic_menu_add"
+        android:focusable="true" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

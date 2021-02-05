@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/recipes_navigation.xml"
+    app:startDestination="@id/recipesGalleryFragment">
+
+    <fragment
+        android:id="@+id/recipesGalleryFragment"
+        android:name="com.example.householdhelper.recipes.Gallery.RecipesGalleryFragment"
+        android:label="fragment_recipes_list"
+        tools:layout="@layout/fragment_recipe_gallery" />
+    <fragment
+        android:id="@+id/recipeBookFragment"
+        android:name="com.example.householdhelper.recipes.RecipeBook.RecipeBookFragment"
+        android:label="fragment_recipe_book"
+        tools:layout="@layout/fragment_recipe_book" />
+</navigation>

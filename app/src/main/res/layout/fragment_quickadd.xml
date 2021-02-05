@@ -4,13 +4,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".QuickAddFragment">
+    tools:context=".lists.QuickAddFragment">
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/quickAddRecyclerView"
-        android:layout_width="409dp"
-        android:layout_height="681dp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         android:layout_marginTop="64dp"
+        android:contentDescription="quick add list"
         app:layout_constraintBottom_toTopOf="@+id/dividerLinearLayout"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -20,7 +21,10 @@
         android:id="@+id/dividerLinearLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:gravity="right"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginBottom="8dp"
+        android:gravity="end"
         android:orientation="horizontal"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -31,7 +35,8 @@
             android:id="@+id/returnButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="back"
+            android:contentDescription="back button"
+            android:text="@string/button_text_back"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />

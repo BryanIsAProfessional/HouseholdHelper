@@ -3,17 +3,27 @@ plugins {
 }
 
 android {
+    signingConfigs {
+        debug {
+            storeFile file('C:\\Users\\Bryan\\Documents\\keystore.jks')
+            storePassword 'Fireknight0'
+            keyAlias 'Bryan'
+            keyPassword 'Fireknight0'
+        }
+    }
     compileSdkVersion 30
     buildToolsVersion "30.0.3"
 
     defaultConfig {
-        applicationId "com.example.householdhelper"
-        minSdkVersion 16
+        applicationId "hh.householdhelper"
+        minSdkVersion 19
         targetSdkVersion 30
-        versionCode 1
-        versionName "1.0"
+        versionCode 3
+        versionName "1.2"
 
-        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        vectorDrawables{
+            useSupportLibrary = true
+        }
     }
 
     buildTypes {
@@ -30,6 +40,9 @@ android {
 
 dependencies {
 
+    implementation "androidx.recyclerview:recyclerview:1.1.0"
+    implementation "androidx.gridlayout:gridlayout:1.0.0"
+
     implementation 'androidx.appcompat:appcompat:1.1.0'
     implementation 'com.google.android.material:material:1.1.0'
     implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
@@ -39,7 +52,4 @@ dependencies {
     implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.2.0'
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
     implementation 'androidx.preference:preference:1.1.1'
-    testImplementation 'junit:junit:4.+'
-    androidTestImplementation 'androidx.test.ext:junit:1.1.1'
-    androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
 }

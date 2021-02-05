@@ -1,6 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.householdhelper">
+    package="com.example.householdhelper"
+    android:versionCode="3"
+    android:versionName="1.2">
+
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+
 
     <application
         android:allowBackup="true"
@@ -8,29 +14,42 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.HouseholdHelper">
+        android:theme="@style/Theme.HouseholdHelper"
+        >
+
+        <activity android:name=".recipes.RecipeActivity"
+            android:parentActivityName=".recipes.RecipesActivity"></activity>
         <activity
-            android:name=".SettingsActivity"
-            android:label="@string/title_activity_settings"></activity>
+            android:name=".recipes.RecipesActivity"
+            android:label="@string/title_activity_recipes"
+            android:parentActivityName=".MainActivity" />
         <activity
-            android:name=".ListOfListsActivity"
+            android:name=".schedule.ScheduleActivity"
+            android:label="@string/title_activity_schedule"
+            android:parentActivityName=".MainActivity" />
+        <activity
+            android:name=".settings.SettingsActivity"
+            android:label="@string/title_activity_settings"
+            android:parentActivityName=".MainActivity" />
+        <activity
+            android:name=".lists.ListOfListsActivity"
             android:label="@string/title_activity_lists"
             android:parentActivityName=".MainActivity" />
         <activity
-            android:name=".ListActivity"
+            android:name=".lists.ListActivity"
             android:label="@string/title_activity_lists"
-            android:parentActivityName=".ListOfListsActivity"
-            android:theme="@style/Theme.HouseholdHelper.NoActionBar" />
+            android:parentActivityName=".lists.ListOfListsActivity"/>
         <activity
             android:name=".MainActivity"
-            android:label="@string/app_name"
-            android:theme="@style/Theme.HouseholdHelper.NoActionBar">
+            android:label="@string/app_name">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <receiver android:name=".schedule.AlarmReceiver"></receiver>
     </application>
 
 </manifest>

@@ -9,4 +9,29 @@
         <item>reply</item>
         <item>reply_all</item>
     </string-array>
+
+    <string-array name="measurement_types">
+
+        <item>cup</item>
+        <item>pound</item>
+        <item>ounce</item>
+        <item> </item>
+        <item>tablespoon</item>
+        <item>teaspoon</item>
+        <item>gram</item>
+        <item>kilogram</item>
+        <item>pint</item>
+        <item>quart</item>
+        <item>gallon</item>
+        <item>liter</item>
+        <item>milliliter</item>
+        <item>pinch</item>
+
+    </string-array>
+
+    <string-array name="themes">
+        <item>Default</item>
+        <item>Beach</item>
+        <item>Dark</item>
+    </string-array>
 </resources>
