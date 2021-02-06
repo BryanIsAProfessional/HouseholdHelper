@@ -36,7 +36,7 @@
     <a href="https://github.com/BryanIsAProfessional/HouseholdHelper"><strong>Explore the docs »</strong></a>
     <br />
     <br />
-    <a href="https://github.com/BryanIsAProfessional/HouseholdHelper/releases/download/alpha/app-release.apk">Download APK</a>
+    <a href="https://github.com/BryanIsAProfessional/HouseholdHelper/releases/download/alpha/HouseholdHelper.apk">Download APK</a>
     ·
     <a href="https://github.com/BryanIsAProfessional/HouseholdHelper/issues">Report Bug</a>
     ·
@@ -84,7 +84,7 @@ This app will be up on google play soon but you can download it from here as wel
 
 ### Installation
 
-1.  [Download the APK](https://github.com/BryanIsAProfessional/HouseholdHelper/releases/download/alpha/app-release.apk)
+1.  [Download the APK](https://github.com/BryanIsAProfessional/HouseholdHelper/releases/download/alpha/HouseholdHelper.apk)
    ```sh
    Transfer the file to your phone
    ```
