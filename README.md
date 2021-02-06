@@ -25,7 +25,7 @@
 <br />
 <p align="center">
   <a href="https://github.com/BryanIsAProfessional/HouseholdHelper">
-    <img src="images/logo.png" alt="Logo" width="80" height="80">
+    <img src="https://github.com/BryanIsAProfessional/HouseholdHelper/blob/master/app/src/main/res/mipmap-xxxhdpi/ic_launcher.png" alt="Logo" width="80" height="80">
   </a>
 
   <h3 align="center">Household Helper</h3>
@@ -73,14 +73,13 @@
 <!-- ABOUT THE PROJECT -->
 ## About The Project
 
-[![Product Name Screen Shot][product-screenshot]](https://example.com)
-
+This app is a collection of tools that I use to make errands and meal planning easier.
 
 
 <!-- GETTING STARTED -->
 ## Getting Started
 
-This app will be up on google play soon but you can download it from here as well.
+Household Helper will be up on google play soon but you can download it from here as well.
 
 ### Installation
 
@@ -99,9 +98,17 @@ This app will be up on google play soon but you can download it from here as wel
 <!-- USAGE EXAMPLES -->
 ## Usage
 
-Use this space to show useful examples of how a project can be used. Additional screenshots, code examples and demos work well in this space. You may also link to more resources.
+Create easy-to-use shopping lists quickly using our quick-add feature
+<p float="left">
+  <img src="https://i.imgur.com/UHqKQJV.png" width="270" height="540" altText="List Screen Shot">
+  <img src="https://i.imgur.com/H0ifTBO.png" width="270" height="540" altText="Quick Add Screen Shot">
+</p>
 
-_For more examples, please refer to the [Documentation](https://example.com)_
+Add entire recipes directly into your shopping list
+<p float="left">
+  <img src="https://i.imgur.com/VgjUwwS.png" width="270" height="540" altText="Recipe Screen Shot">
+  <img src="https://i.imgur.com/CL9tQje.png" width="270" height="540" altText="List After Add Screen Shot">
+</p>
 
 
 
