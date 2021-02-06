@@ -1,34 +1,32 @@
 package com.example.householdhelper.lists;
 
-import android.content.Context;
-import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.Resources;
 import android.os.Bundle;
-
-import com.example.householdhelper.helpers.DatabaseHelper;
-import com.example.householdhelper.R;
-import com.example.householdhelper.recipes.RecipeActivity;
+import android.preference.PreferenceManager;
+import android.view.Menu;
+import android.view.MenuItem;
 
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
-import android.preference.PreferenceManager;
-import android.util.Log;
-import android.view.Menu;
-import android.view.MenuItem;
-import android.view.inputmethod.EditorInfo;
-import android.widget.SearchView;
+import com.example.householdhelper.R;
+import com.example.householdhelper.helpers.DatabaseHelper;
 
+/**
+ * The activity for viewing a single list. Contains a list fragment that handles list items.
+ *
+ * @author Bryan Burdick
+ * @version 1.0
+ * @since 2021-02-06
+ */
 public class ListActivity extends AppCompatActivity {
 
     public String id;
     public String listTitle;
     public String dateCreated;
     public String lastModified;
-    private DatabaseHelper db;
-    public static final String TAG = "ListActivity";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,7 +35,7 @@ public class ListActivity extends AppCompatActivity {
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        db = new DatabaseHelper(this);
+        DatabaseHelper db = new DatabaseHelper(this);
 
         // set from getextras
         id = getIntent().getStringExtra("listId");
@@ -58,6 +56,7 @@ public class ListActivity extends AppCompatActivity {
         return true;
     }
 
+    // creates a dropdown menu to set this list as the active shopping list or to-do list in sharedpreferences
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         SharedPreferences sharedPref;
@@ -79,6 +78,10 @@ public class ListActivity extends AppCompatActivity {
         return(super.onOptionsItemSelected(item));
     }
 
+    /**
+     * Chooses the theme based on the one selected in sharedpreferences, or default if none is selected
+     * @return the selected theme
+     */
     @Override
     public Resources.Theme getTheme(){
         Resources.Theme theme = super.getTheme();

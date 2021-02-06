@@ -23,12 +23,18 @@ import com.example.householdhelper.recipes.Recipe;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Extended RecyclerView Adapter for displaying recipe titles with an image
+ *
+ * @author Bryan Burdick
+ * @version 1.0
+ * @since 2021-02-06
+ */
 public class RecipesGalleryAdapter extends RecyclerView.Adapter<RecipesGalleryAdapter.RecipesAdapterViewHolder> implements Filterable {
     private final ArrayList<Recipe> list;
     public OnItemClickListener listener;
     private final Context context;
     private final ArrayList<Recipe> listFull;
-    public static final String TAG = "RecipesListAdapter";
 
     @Override
     public Filter getFilter() {
@@ -68,6 +74,10 @@ public class RecipesGalleryAdapter extends RecyclerView.Adapter<RecipesGalleryAd
         void onItemClick(int position);
     }
 
+    /**
+     * sets onclicklistener
+     * @param listener the new listener
+     */
     public void setOnItemClickListener(OnItemClickListener listener){
         this.listener = listener;
     }
@@ -92,12 +102,22 @@ public class RecipesGalleryAdapter extends RecyclerView.Adapter<RecipesGalleryAd
         }
     }
 
+    /**
+     * default constructor
+     * @param inList an ArrayList of Recipes
+     */
     public RecipesGalleryAdapter(ArrayList<Recipe> inList, Context context){
         list = inList;
         this.context = context;
         listFull = new ArrayList<>(list);
     }
 
+    /**
+     * Rotates a bitmap to a given orientation
+     * @param bitmap the bitmap to rotate
+     * @param degrees degrees to rotate bitmap
+     * @return the rotated bitmap
+     */
     public static Bitmap rotateBitmap(Bitmap bitmap, int degrees) {
         Matrix matrix = new Matrix();
         matrix.postRotate(degrees);
@@ -111,6 +131,11 @@ public class RecipesGalleryAdapter extends RecyclerView.Adapter<RecipesGalleryAd
         return viewHolder;
     }
 
+    /**
+     * sets values of holder's views to match items in the ArrayList
+     * @param holder current ViewHolder
+     * @param position ViewHolder's index in the ArrayList
+     */
     @Override
     public void onBindViewHolder(@NonNull RecipesAdapterViewHolder holder, int position) {
         Recipe currentItem = list.get(position);
@@ -131,6 +156,10 @@ public class RecipesGalleryAdapter extends RecyclerView.Adapter<RecipesGalleryAd
         holder.cookTime.setText(" in " + currentItem.getCookTimeInMinutes() +  " Minutes");
     }
 
+    /**
+     * returns the size of the ArrayList
+     * @return size of the ArrayList
+     */
     @Override
     public int getItemCount() {
         return list.size();

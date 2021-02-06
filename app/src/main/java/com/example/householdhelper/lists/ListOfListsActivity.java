@@ -1,9 +1,7 @@
 package com.example.householdhelper.lists;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -13,9 +11,6 @@ import android.content.res.Resources;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
-import android.util.Log;
-import android.view.View;
-import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.example.householdhelper.helpers.DatabaseHelper;
@@ -24,11 +19,15 @@ import com.example.householdhelper.R;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.ArrayList;
-import java.util.Collections;
 
+/**
+ * The activity for viewing a list of lists.
+ *
+ * @author Bryan Burdick
+ * @version 1.0
+ * @since 2021-02-06
+ */
 public class ListOfListsActivity extends AppCompatActivity implements NewListDialog.NewListDialogListener, ListsAdapter.OnItemClickListener {
-
-    private static final String TAG = "ListOfListsActivity";
 
     private boolean firstTimeSetup;
 
@@ -67,6 +66,9 @@ public class ListOfListsActivity extends AppCompatActivity implements NewListDia
         });
     }
 
+    /**
+     * retrieves list items from database and stores them in an ArrayList<List>
+     */
     public void initializeArrayList(){
         Cursor ret = db.getAllLists();
         if(ret.moveToFirst()){
@@ -81,6 +83,9 @@ public class ListOfListsActivity extends AppCompatActivity implements NewListDia
         }
     }
 
+    /**
+     * passes the layoutManager, adapter, and ArrayList to the recyclerview
+     */
     public void startRecyclerView(){
         recyclerView = findViewById(R.id.listOfListsRecyclerView);
         layoutManager = new LinearLayoutManager(this);
@@ -95,7 +100,7 @@ public class ListOfListsActivity extends AppCompatActivity implements NewListDia
             @Override
             public void onDeleteClick(int position) {
 
-                String id = listsList.get(position).getid();
+                String id = listsList.get(position).getId();
                 SharedPreferences preferences = android.preference.PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
                 String shopListId = preferences.getString(getString(R.string.shopping_list), "-1");
                 String todoListId = preferences.getString(getString(R.string.todo_list), "-1");
@@ -118,18 +123,6 @@ public class ListOfListsActivity extends AppCompatActivity implements NewListDia
         });
 
         recyclerView.setAdapter(adapter);
-    }
-
-    public String printArrayList(ArrayList<List> l){
-        String ret = "[ ";
-        for (int i = 0; i < l.size(); i++){
-            if(i > 0){
-                ret += ", ";
-            }
-            ret += l.get(i).getName();
-        }
-        ret += " ]";
-        return ret;
     }
 
     public void openNewListDialog(){
@@ -181,9 +174,12 @@ public class ListOfListsActivity extends AppCompatActivity implements NewListDia
     @Override
     public void onDeleteClick(int position) {
         deleteList(listsList.get(position).getName(), position);
-        //recyclerView.getAdapter().notifyDataSetChanged();
     }
 
+    /**
+     * Chooses the theme based on the one selected in sharedpreferences, or default if none is selected
+     * @return the selected theme
+     */
     @Override
     public Resources.Theme getTheme(){
         Resources.Theme theme = super.getTheme();

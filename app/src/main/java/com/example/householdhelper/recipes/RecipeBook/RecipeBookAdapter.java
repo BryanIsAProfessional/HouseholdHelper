@@ -1,14 +1,10 @@
 package com.example.householdhelper.recipes.RecipeBook;
 
-import android.content.Context;
-import android.graphics.drawable.Drawable;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Filter;
 import android.widget.Filterable;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -20,13 +16,18 @@ import com.example.householdhelper.recipes.Recipe;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Extended RecyclerView Adapter for displaying recipe titles
+ *
+ * @author Bryan Burdick
+ * @version 1.0
+ * @since 2021-02-06
+ */
 public class RecipeBookAdapter extends RecyclerView.Adapter<RecipeBookAdapter.RecipesAdapterViewHolder> implements Filterable {
     private final ArrayList<Recipe> list;
     private final ArrayList<Recipe> listFull;
 
     public OnItemClickListener listener;
-    private final Context context;
-    public static final String TAG = "RecipeBookAdapter";
 
     @Override
     public Filter getFilter() {
@@ -67,6 +68,10 @@ public class RecipeBookAdapter extends RecyclerView.Adapter<RecipeBookAdapter.Re
         void onItemClick(int position);
     }
 
+    /**
+     * sets onclicklistener
+     * @param listener the new listener
+     */
     public void setOnItemClickListener(OnItemClickListener listener){
         this.listener = listener;
     }
@@ -84,9 +89,12 @@ public class RecipeBookAdapter extends RecyclerView.Adapter<RecipeBookAdapter.Re
         }
     }
 
-    public RecipeBookAdapter(ArrayList<Recipe> inList, Context context){
+    /**
+     * default constructor
+     * @param inList an ArrayList of Recipe
+     */
+    public RecipeBookAdapter(ArrayList<Recipe> inList){
         list = inList;
-        this.context = context;
         listFull = new ArrayList<>(list);
     }
 
@@ -97,12 +105,21 @@ public class RecipeBookAdapter extends RecyclerView.Adapter<RecipeBookAdapter.Re
         return viewHolder;
     }
 
+    /**
+     * sets values of holder's views to match items in the ArrayList
+     * @param holder current ViewHolder
+     * @param position ViewHolder's index in the ArrayList
+     */
     @Override
     public void onBindViewHolder(@NonNull RecipesAdapterViewHolder holder, int position) {
         Recipe currentItem = list.get(position);
         holder.recipeName.setText(currentItem.getName());
     }
 
+    /**
+     * returns the size of the ArrayList
+     * @return size of the ArrayList
+     */
     @Override
     public int getItemCount() {
         return list.size();

@@ -20,10 +20,16 @@ import com.example.householdhelper.helpers.DatabaseHelper;
 
 import java.util.ArrayList;
 
+/**
+ * Extended RecyclerView Adapter for displaying quick add items
+ *
+ * @author Bryan Burdick
+ * @version 1.0
+ * @since 2021-02-06
+ */
 public class QuickAddAdapter extends RecyclerView.Adapter<QuickAddAdapter.QuickAddAdapterViewHolder> {
     private final ArrayList<QuickAddItem> list;
     public OnItemClickListener listener;
-    public static final String TAG = "QuickAddAdapter";
     public String listId;
     public Cursor listItems;
     private final Context context;
@@ -34,6 +40,10 @@ public class QuickAddAdapter extends RecyclerView.Adapter<QuickAddAdapter.QuickA
         void onItemLongClick(int position);
     }
 
+    /**
+     * sets onclicklistener
+     * @param listener the new listener
+     */
     public void setOnItemClickListener(OnItemClickListener listener){
         this.listener = listener;
     }
@@ -50,6 +60,12 @@ public class QuickAddAdapter extends RecyclerView.Adapter<QuickAddAdapter.QuickA
         }
     }
 
+    /**
+     * default constructor
+     * @param list an ArrayList of QuickAddItems
+     * @param listId the id of the shopping list to add to
+     * @param context activity context for instantiating database
+     */
     public QuickAddAdapter(ArrayList<QuickAddItem> list, String listId, Context context){
         this.list = list;
         this.listId = listId;
@@ -65,6 +81,11 @@ public class QuickAddAdapter extends RecyclerView.Adapter<QuickAddAdapter.QuickA
         return viewHolder;
     }
 
+    /**
+     * sets values of holder's views to match items in the ArrayList
+     * @param holder current ViewHolder
+     * @param position ViewHolder's index in the ArrayList
+     */
     @Override
     public void onBindViewHolder(@NonNull QuickAddAdapterViewHolder holder, int position) {
         QuickAddItem currentItem = list.get(position);
@@ -86,14 +107,11 @@ public class QuickAddAdapter extends RecyclerView.Adapter<QuickAddAdapter.QuickA
             }while(!holder.checkBox.isChecked() && listItems.moveToNext());
         }
 
-        holder.checkBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if(isChecked){
-                    db.insertListItem(listId, itemName, "-1");
-                }else{
-                    db.deleteListItemByName(listId, itemName);
-                }
+        holder.checkBox.setOnCheckedChangeListener((buttonView, isChecked) -> {
+            if(isChecked){
+                db.insertListItem(listId, itemName, "-1");
+            }else{
+                db.deleteListItemByName(listId, itemName);
             }
         });
 
@@ -103,6 +121,10 @@ public class QuickAddAdapter extends RecyclerView.Adapter<QuickAddAdapter.QuickA
         });
     }
 
+    /**
+     * returns the size of the ArrayList
+     * @return size of the ArrayList
+     */
     @Override
     public int getItemCount() {
         return list.size();

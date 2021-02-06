@@ -33,8 +33,6 @@ import java.util.ArrayList;
 
 public class RecipesActivity extends AppCompatActivity {
 
-    public static final String TAG = "RecipesActivity";
-
     public ArrayList<Recipe> list = new ArrayList<>();
     public DatabaseHelper db;
 

@@ -13,6 +13,14 @@ import androidx.core.app.NotificationManagerCompat;
 
 import com.example.householdhelper.R;
 
+/**
+ * Schedules notifications for a set time in the future. Notification id, title, and message must be passed in through the intent
+ *
+ * made by following https://www.youtube.com/watch?v=F3IFF8A-ewE&ab_channel=CodingwithSara
+ * @author Bryan Burdick
+ * @version 1.0
+ * @since 2021-02-06
+ */
 public class AlarmReceiver extends BroadcastReceiver {
     private static final String CHANNEL_ID = "TEST_CHANNEL";
 

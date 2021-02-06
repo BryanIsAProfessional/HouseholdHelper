@@ -2,10 +2,8 @@ package com.example.householdhelper.recipes;
 
 import android.app.Activity;
 import android.content.Context;
-import android.icu.util.Measure;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.util.Log;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -18,20 +16,28 @@ import android.widget.Spinner;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.householdhelper.R;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 
+/**
+ * Extended RecyclerView Adapter for displaying ingredients
+ *
+ * @author Bryan Burdick
+ * @version 1.0
+ * @since 2021-02-06
+ */
 public class MeasurementsAdapter extends RecyclerView.Adapter<MeasurementsAdapter.MeasurementTypesAdapterViewHolder> {
     private final ArrayList<Measurement> list;
     public boolean editMode;
     private final ArrayList<MeasurementTypesAdapterViewHolder> viewHolders = new ArrayList<>();
-    public static final String TAG = "MeasurementsAdapter";
 
+    /**
+     * Toggles whether text should be editable or not
+     * @param editMode the new state for text editability
+     */
     public void setEditMode(boolean editMode){
         this.editMode = editMode;
         MeasurementTypesAdapterViewHolder holder;
@@ -68,6 +74,10 @@ public class MeasurementsAdapter extends RecyclerView.Adapter<MeasurementsAdapte
         }
     }
 
+    /**
+     * default constructor
+     * @param inList an ArrayList of Measurements
+     */
     public MeasurementsAdapter(ArrayList<Measurement> inList){
         list = inList;
     }
@@ -80,6 +90,11 @@ public class MeasurementsAdapter extends RecyclerView.Adapter<MeasurementsAdapte
         return viewHolder;
     }
 
+    /**
+     * sets values of holder's views to match items in the ArrayList
+     * @param holder current ViewHolder
+     * @param position ViewHolder's index in the ArrayList
+     */
     @Override
     public void onBindViewHolder(@NonNull MeasurementTypesAdapterViewHolder holder, int position) {
         holder.editMode = editMode;
@@ -96,7 +111,7 @@ public class MeasurementsAdapter extends RecyclerView.Adapter<MeasurementsAdapte
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 holder.measurementType = holder.measurementsSpinner.getSelectedItem().toString();
                 holder.measurementTextView.setText(holder.measurementAmount + " " + holder.measurementType);
-                list.get(holder.getAdapterPosition()).setName(holder.measurementsSpinner.getSelectedItem().toString());
+                list.get(holder.getAdapterPosition()).setType(holder.measurementsSpinner.getSelectedItem().toString());
 
             }
 
@@ -186,6 +201,10 @@ public class MeasurementsAdapter extends RecyclerView.Adapter<MeasurementsAdapte
         viewHolders.add(holder);
     }
 
+    /**
+     * returns the size of the ArrayList
+     * @return size of the ArrayList
+     */
     @Override
     public int getItemCount() {
         return list.size();
@@ -201,24 +220,6 @@ public class MeasurementsAdapter extends RecyclerView.Adapter<MeasurementsAdapte
             holder = viewHolders.get(i);
             ret += holder.measurementAmount + " " + holder.measurementType;
             if(i < viewHolders.size()-1){
-                ret += ", ";
-            }
-        }
-
-        ret += " ]\n";
-
-        return ret;
-    }
-
-    public String printArray(ArrayList<Measurement> list){
-        String ret = "[ ";
-
-        Measurement currentItem;
-
-        for(int i = 0; i < list.size(); i++){
-            currentItem = list.get(i);
-            ret += currentItem.getAmount() + " " + currentItem.getType();
-            if(i < list.size()-1){
                 ret += ", ";
             }
         }

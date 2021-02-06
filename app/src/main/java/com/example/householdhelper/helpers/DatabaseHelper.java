@@ -13,6 +13,14 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+/**
+ * Provides access to an SQLite database and defines CRUD methods.
+ *
+ * @author Bryan Burdick
+ * @version 1.0
+ * @since 2021-02-06
+ */
+
 public class DatabaseHelper extends SQLiteOpenHelper {
 
     public static final String TAG = "DatabaseHelper";

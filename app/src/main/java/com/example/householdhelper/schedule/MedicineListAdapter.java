@@ -26,6 +26,13 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
+/**
+ * Extended RecyclerView Adapter for displaying medicine trackers
+ *
+ * @author Bryan Burdick
+ * @version 1.0
+ * @since 2021-02-06
+ */
 public class MedicineListAdapter extends RecyclerView.Adapter<MedicineListAdapter.MedicineAdapterViewHolder> {
     private final ArrayList<Medicine> list;
     private final ArrayList<MedicineAdapterViewHolder> viewHolders = new ArrayList<>();
@@ -53,6 +60,10 @@ public class MedicineListAdapter extends RecyclerView.Adapter<MedicineListAdapte
         }
     }
 
+    /**
+     * default constructor
+     * @param inList ArrayList of Medicines
+     */
     public MedicineListAdapter(ArrayList<Medicine> inList){
         list = inList;
 
@@ -66,6 +77,11 @@ public class MedicineListAdapter extends RecyclerView.Adapter<MedicineListAdapte
         return viewHolder;
     }
 
+    /**
+     * sets values of holder's views to match items in the ArrayList
+     * @param holder current ViewHolder
+     * @param position ViewHolder's index in the ArrayList
+     */
     @Override
     public void onBindViewHolder(@NonNull MedicineAdapterViewHolder holder, int position) {
 
@@ -143,6 +159,10 @@ public class MedicineListAdapter extends RecyclerView.Adapter<MedicineListAdapte
         viewHolders.add(holder);
     }
 
+    /**
+     * returns the size of the ArrayList
+     * @return size of the ArrayList
+     */
     @Override
     public int getItemCount() {
         return list.size();

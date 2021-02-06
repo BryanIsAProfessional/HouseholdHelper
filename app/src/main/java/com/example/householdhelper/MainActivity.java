@@ -25,14 +25,18 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
+/**
+ * Homepage activity
+ *
+ * @author Bryan Burdick
+ * @version 1.0
+ * @since 2021-02-06
+ */
 public class MainActivity extends AppCompatActivity {
-
-    public static final String TAG = "MainActivity";
 
     private DrawerLayout drawerLayout;
     private NavigationView navigationView;
     private Toolbar toolbar;
-    private TextView welcomeTextView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,14 +46,7 @@ public class MainActivity extends AppCompatActivity {
         toolbar = findViewById(R.id.toolbar);
         drawerLayout = findViewById(R.id.drawer_layout);
         navigationView = findViewById(R.id.nav_view);
-        welcomeTextView = findViewById(R.id.textViewWelcome);
 
-        WelcomeGenerator welcomer = new WelcomeGenerator();
-
-        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
-        String name = preferences.getString("name", "");
-
-        welcomeTextView.setText(welcomer.generateWelcome(name));
 
         setSupportActionBar(toolbar);
 
@@ -90,6 +87,10 @@ public class MainActivity extends AppCompatActivity {
         else{super.onBackPressed();}
     }
 
+    /**
+     * Chooses the theme based on the one selected in sharedpreferences, or default if none is selected
+     * @return the selected theme
+     */
     @Override
     public Resources.Theme getTheme(){
         Resources.Theme theme = super.getTheme();

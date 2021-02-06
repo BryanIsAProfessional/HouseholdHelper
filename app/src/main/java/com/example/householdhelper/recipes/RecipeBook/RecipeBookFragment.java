@@ -26,10 +26,15 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.ArrayList;
 
+/**
+ * The fragment for viewing recipe titles. Handles retrieving recipes from
+ * database and displaying them in a recyclerview.
+ *
+ * @author Bryan Burdick
+ * @version 1.0
+ * @since 2021-02-06
+ */
 public class RecipeBookFragment extends Fragment {
-
-    // the fragment initialization parameters
-    private static final String TAG = "RecipeBookFragment";
 
     public ArrayList<Recipe> list = new ArrayList<>();
 
@@ -69,10 +74,13 @@ public class RecipeBookFragment extends Fragment {
         return inflater.inflate(R.layout.fragment_recipe_book, container, false);
     }
 
+    /**
+     * passes the layoutManager, adapter, and ArrayList to the recyclerview
+     */
     public void startRecyclerView(){
         recyclerView = getView().findViewById(R.id.recipeBookRecyclerView);
         layoutManager = new LinearLayoutManager(getContext());
-        adapter = new RecipeBookAdapter(list, getContext());
+        adapter = new RecipeBookAdapter(list);
         adapter.setOnItemClickListener(position -> {
             Intent intent = new Intent(getContext(), RecipeActivity.class);
             intent.putExtra("recipeId", list.get(position).getId());
@@ -80,18 +88,6 @@ public class RecipeBookFragment extends Fragment {
         });
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setAdapter(adapter);
-    }
-
-    public String printArrayList(ArrayList<Recipe> l){
-        String ret = "[ ";
-        for (int i = 0; i < l.size(); i++){
-            if(i > 0){
-                ret += ", ";
-            }
-            ret += l.get(i).getName();
-        }
-        ret += " ]";
-        return ret;
     }
 
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
@@ -102,8 +98,9 @@ public class RecipeBookFragment extends Fragment {
         startRecyclerView();
     }
 
-
-
+    /**
+     * refreshes recyclerview content when resuming
+     */
     @Override
     public void onResume() {
         super.onResume();

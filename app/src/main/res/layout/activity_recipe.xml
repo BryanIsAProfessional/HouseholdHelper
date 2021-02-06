@@ -33,10 +33,9 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="16dp"
-                    android:layout_marginLeft="16dp"
                     android:layout_marginTop="16dp"
                     android:text="@string/recipe_1"
-                    android:textSize="@dimen/title_header_font_size"
+                    android:textSize="@dimen/title_small_header_font_size"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
@@ -49,7 +48,7 @@
                     android:hint="@string/recipe_13"
                     android:importantForAutofill="no"
                     android:inputType="textNoSuggestions"
-                    android:textSize="@dimen/title_header_font_size"
+                    android:textSize="@dimen/title_small_header_font_size"
                     android:visibility="invisible"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
@@ -253,7 +252,9 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
                     android:layout_marginEnd="8dp"
+                    android:layout_marginBottom="8dp"
                     android:contentDescription="add to shopping list"
+                    app:layout_constraintBottom_toTopOf="@+id/recipePictureImageView"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
                     app:srcCompat="@drawable/ic_baseline_local_grocery_store_48" />
@@ -264,7 +265,9 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
                     android:layout_marginEnd="8dp"
+                    android:layout_marginBottom="8dp"
                     android:contentDescription="rotate recipe image"
+                    app:layout_constraintBottom_toTopOf="@+id/recipePictureImageView"
                     app:layout_constraintEnd_toEndOf="@+id/addToShoppingListButton"
                     app:layout_constraintTop_toTopOf="parent"
                     app:srcCompat="@drawable/ic_baseline_rotate_right_48" />

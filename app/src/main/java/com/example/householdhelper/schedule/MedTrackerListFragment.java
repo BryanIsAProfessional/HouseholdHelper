@@ -30,9 +30,11 @@ import java.util.Calendar;
 import java.util.Date;
 
 /**
- * A simple {@link Fragment} subclass.
- * Use the {@link MedTrackerListFragment#newInstance} factory method to
- * create an instance of this fragment.
+ * The fragment for displaying tracked medications.
+ *
+ * @author Bryan Burdick
+ * @version 1.0
+ * @since 2021-02-06
  */
 public class MedTrackerListFragment extends Fragment implements DeleteItemDialog.DeleteItemDialogListener{
 
@@ -50,24 +52,16 @@ public class MedTrackerListFragment extends Fragment implements DeleteItemDialog
         // Required empty public constructor
     }
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment MedTrackerList.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static MedTrackerListFragment newInstance(String param1, String param2) {
+
+    public static MedTrackerListFragment newInstance() {
         MedTrackerListFragment fragment = new MedTrackerListFragment();
-        Bundle args = new Bundle();
-        fragment.setArguments(args);
         return fragment;
     }
 
+    /**
+     * passes the layoutManager, adapter, and ArrayList to the recyclerview
+     */
     private void startRecyclerView(){
-
         adapter = new MedicineListAdapter(list);
         layoutManager = new LinearLayoutManager(getContext()){
             @Override
@@ -81,6 +75,9 @@ public class MedTrackerListFragment extends Fragment implements DeleteItemDialog
 
     }
 
+    /**
+     * retrieves list items from database and stores them in an ArrayList<Medicine>
+     */
     private void setVariablesFromDatabase(){
         db = new DatabaseHelper(getContext());
         list = new ArrayList<>();
@@ -125,6 +122,11 @@ public class MedTrackerListFragment extends Fragment implements DeleteItemDialog
         return inflater.inflate(R.layout.fragment_med_tracker_list, container, false);
     }
 
+    /**
+     * initialize views in layout
+     * @param view the layout
+     * @param savedInstanceState
+     */
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);

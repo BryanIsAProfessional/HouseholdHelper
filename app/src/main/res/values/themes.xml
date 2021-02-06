@@ -9,15 +9,21 @@
         <item name="colorSecondaryVariant">@color/default_secondary_variant</item>
         <item name="colorOnSecondary">@color/black</item>
         <!-- Status bar color. -->
-        <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimary</item>
+        <item name="colorAccent">@color/default_secondary</item>
+        <item name="android:statusBarColor" tools:targetApi="l">?attr/colorAccent</item>
         <!-- Text styling. -->
         <item name="android:textColor">@color/black</item>
         <item name="android:textSize">@dimen/title_medium_font_size</item>
-        <item name="actionBarTheme">@style/Theme.HouseholdHelper.AppBarOverlay</item>
+        <item name="android:actionBarStyle">@style/Theme.HouseholdHelper.AppBarOverlay</item>
+
+        <!-- Background styling. -->
+        <item name="android:windowBackground">@color/white</item>
     </style>
 
     <style name="Theme.HouseholdHelper.ActionBarStyle" parent="Theme.MaterialComponents.DayNight.DarkActionBar">
         <item name="android:titleTextStyle">@style/Theme.ActionBar.TitleTextStyle</item>
+        <item name="android:background">?attr/colorPrimary</item>
+
     </style>
 
     <style name="Theme.HouseholdHelper.LargeFont" parent="Theme.HouseholdHelper">
@@ -42,7 +48,8 @@
         <item name="colorSecondaryVariant">@color/sunset_secondary_variant</item>
         <item name="colorOnSecondary">@color/black</item>
         <!-- Status bar color. -->
-        <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimary</item>
+        <item name="colorAccent">@color/default_secondary</item>
+        <item name="android:statusBarColor" tools:targetApi="l">?attr/colorAccent</item>
         <!-- Text styling. -->
         <item name="android:textColor">@color/black</item>
         <item name="android:textSize">@dimen/title_medium_font_size</item>
@@ -63,7 +70,8 @@
         <item name="colorSecondaryVariant">@color/dark_secondary_variant</item>
 
         <!-- Status bar color. -->
-        <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimary</item>
+        <item name="colorAccent">@color/default_secondary</item>
+        <item name="android:statusBarColor" tools:targetApi="l">?attr/colorAccent</item>
         <!-- Text styling. -->
         <item name="android:textColor">@color/dark_text</item>
 
@@ -79,6 +87,7 @@
 
     <style name="Theme.HouseholdHelper.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" >
         <item name="android:textColorPrimary">@color/white</item>
+        <item name="android:background">?attr/colorPrimary</item>
     </style>
 
     <style name="Theme.HouseholdHelper.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />

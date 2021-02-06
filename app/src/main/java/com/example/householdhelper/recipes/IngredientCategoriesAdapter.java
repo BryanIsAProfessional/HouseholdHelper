@@ -30,18 +30,27 @@ import java.net.InterfaceAddress;
 import java.util.ArrayList;
 import java.util.Collections;
 
+/**
+ * Extended RecyclerView Adapter for displaying ingredient categories
+ *
+ * @author Bryan Burdick
+ * @version 1.0
+ * @since 2021-02-06
+ */
 public class IngredientCategoriesAdapter extends RecyclerView.Adapter<IngredientCategoriesAdapter.IngredientsAdapterViewHolder> {
     private final ArrayList<IngredientCategory> categoryList;
     private final ArrayList<IngredientsAdapterViewHolder> viewHolders = new ArrayList<>();
     public boolean editMode;
     public DeleteListener listener;
 
-    public static final String TAG = "IngredntCategoryAdapter";
-
     interface DeleteListener{
         void deleteSwipe(String id);
     }
 
+    /**
+     * Toggles whether text should be editable or not
+     * @param editMode the new state for text editability
+     */
     public void setEditMode(boolean editMode){
         this.editMode = editMode;
         IngredientsAdapterViewHolder holder;
@@ -81,6 +90,11 @@ public class IngredientCategoriesAdapter extends RecyclerView.Adapter<Ingredient
         }
     }
 
+    /**
+     * default constructor
+     * @param categoryList an ArrayList of IngredientCategory
+     * @param editMode sets whether text should be editable or not
+     */
     public IngredientCategoriesAdapter(ArrayList<IngredientCategory> categoryList, boolean editMode, DeleteListener listener){
         this.categoryList = categoryList;
         this.editMode = editMode;
@@ -99,6 +113,11 @@ public class IngredientCategoriesAdapter extends RecyclerView.Adapter<Ingredient
         return viewHolder;
     }
 
+    /**
+     * sets values of holder's views to match items in the ArrayList
+     * @param holder current ViewHolder
+     * @param position ViewHolder's index in the ArrayList
+     */
     @Override
     public void onBindViewHolder(@NonNull IngredientsAdapterViewHolder holder, int position) {
         holder.editMode = editMode;
@@ -261,6 +280,10 @@ public class IngredientCategoriesAdapter extends RecyclerView.Adapter<Ingredient
         viewHolders.add(holder);
     }
 
+    /**
+     * returns the size of the ArrayList
+     * @return size of the ArrayList
+     */
     @Override
     public int getItemCount() {
         return categoryList.size();

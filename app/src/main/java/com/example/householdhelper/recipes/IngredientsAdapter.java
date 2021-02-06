@@ -28,12 +28,22 @@ import com.example.householdhelper.helpers.DatabaseHelper;
 import java.util.ArrayList;
 import java.util.Collections;
 
+/**
+ * Extended RecyclerView Adapter for displaying ingredients
+ *
+ * @author Bryan Burdick
+ * @version 1.0
+ * @since 2021-02-06
+ */
 public class IngredientsAdapter extends RecyclerView.Adapter<IngredientsAdapter.IngredientsAdapterViewHolder> {
     private final ArrayList<Ingredient> list;
     public boolean editMode;
     private final ArrayList<IngredientsAdapter.IngredientsAdapterViewHolder> viewHolders = new ArrayList<>();
-    public static final String TAG = "IngredientsAdapter";
 
+    /**
+     * Toggles whether text should be editable or not
+     * @param editMode the new state for text editability
+     */
     public void setEditMode(boolean editMode){
         this.editMode = editMode;
         IngredientsAdapter.IngredientsAdapterViewHolder holder;
@@ -75,6 +85,10 @@ public class IngredientsAdapter extends RecyclerView.Adapter<IngredientsAdapter.
         }
     }
 
+    /**
+     * default constructor
+     * @param inList an ArrayList of Ingredients
+     */
     public IngredientsAdapter(ArrayList<Ingredient> inList){
         list = inList;
     }
@@ -87,6 +101,11 @@ public class IngredientsAdapter extends RecyclerView.Adapter<IngredientsAdapter.
         return viewHolder;
     }
 
+    /**
+     * sets values of holder's views to match items in the ArrayList
+     * @param holder current ViewHolder
+     * @param position ViewHolder's index in the ArrayList
+     */
     @Override
     public void onBindViewHolder(@NonNull IngredientsAdapterViewHolder holder, int position) {
         holder.editMode = editMode;
@@ -190,6 +209,10 @@ public class IngredientsAdapter extends RecyclerView.Adapter<IngredientsAdapter.
         viewHolders.add(holder);
     }
 
+    /**
+     * returns the size of the ArrayList
+     * @return size of the ArrayList
+     */
     @Override
     public int getItemCount() {
         return list.size();

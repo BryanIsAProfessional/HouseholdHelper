@@ -12,6 +12,13 @@ import androidx.appcompat.app.AppCompatDialogFragment;
 
 import com.example.householdhelper.R;
 
+/**
+ * Yes or no dialog to remove an item from a list.
+ *
+ * @author Bryan Burdick
+ * @version 1.0
+ * @since 2021-02-06
+ */
 public class DeleteItemDialog extends AppCompatDialogFragment {
     private DeleteItemDialogListener listener;
 

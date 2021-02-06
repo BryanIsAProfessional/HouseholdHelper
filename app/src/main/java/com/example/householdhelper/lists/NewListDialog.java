@@ -13,6 +13,13 @@ import androidx.appcompat.app.AppCompatDialogFragment;
 
 import com.example.householdhelper.R;
 
+/**
+ * Dialog to get user input for a new list database insert.
+ *
+ * @author Bryan Burdick
+ * @version 1.0
+ * @since 2021-02-06
+ */
 public class NewListDialog extends AppCompatDialogFragment {
     private EditText editTextListName;
     private NewListDialogListener listener;

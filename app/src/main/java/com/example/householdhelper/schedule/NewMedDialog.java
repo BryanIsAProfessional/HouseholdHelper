@@ -17,7 +17,13 @@ import android.widget.ToggleButton;
 import androidx.appcompat.app.AppCompatDialogFragment;
 
 import com.example.householdhelper.R;
-
+/**
+ * Dialog to collect user data to track a medication.
+ *
+ * @author Bryan Burdick
+ * @version 1.0
+ * @since 2021-02-06
+ */
 public class NewMedDialog extends AppCompatDialogFragment {
     private EditText medicineEditText;
     private NewMedDialogListener listener;
@@ -70,6 +76,12 @@ public class NewMedDialog extends AppCompatDialogFragment {
         return "" + hour + ":" + minute;
     }
 
+    /**
+     * calculates the number of hours between doses given the number of doses taken in a given period
+     * @param num
+     * @param period
+     * @return
+     */
     public int calculateHoursBetweenDoses(int num, String period){
         switch(period){
             case "day":

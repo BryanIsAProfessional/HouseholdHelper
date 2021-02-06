@@ -28,6 +28,13 @@ import com.example.householdhelper.lists.DeleteItemDialog;
 import java.util.ArrayList;
 import java.util.Collections;
 
+/**
+ * Extended RecyclerView Adapter for displaying groups of instructions
+ *
+ * @author Bryan Burdick
+ * @version 1.0
+ * @since 2021-02-06
+ */
 public class InstructionCategoriesAdapter extends RecyclerView.Adapter<InstructionCategoriesAdapter.InstructionsAdapterViewHolder> {
     private ArrayList<InstructionCategory> categoryList;
     private final ArrayList<InstructionsAdapterViewHolder> viewHolders = new ArrayList<>();
@@ -39,6 +46,10 @@ public class InstructionCategoriesAdapter extends RecyclerView.Adapter<Instructi
         void deleteSwipe(String id);
     }
 
+    /**
+     * Toggles whether text should be editable or not
+     * @param editMode the new state for text editability
+     */
     public void setEditMode(boolean editMode){
         this.editMode = editMode;
         InstructionsAdapterViewHolder holder;
@@ -79,6 +90,12 @@ public class InstructionCategoriesAdapter extends RecyclerView.Adapter<Instructi
         }
     }
 
+    /**
+     * default constructor
+     * @param categoryList ArrayList of InstructionCategory
+     * @param editMode current state of editMode
+     * @param listener onClickListener
+     */
     public InstructionCategoriesAdapter(ArrayList<InstructionCategory> categoryList, boolean editMode, DeleteListener listener){
         this.categoryList = categoryList;
         this.editMode = editMode;
@@ -98,6 +115,11 @@ public class InstructionCategoriesAdapter extends RecyclerView.Adapter<Instructi
         return viewHolder;
     }
 
+    /**
+     * sets values of holder's views to match items in the ArrayList
+     * @param holder current ViewHolder
+     * @param position ViewHolder's index in the ArrayList
+     */
     @Override
     public void onBindViewHolder(@NonNull InstructionsAdapterViewHolder holder, int position) {
         holder.editMode = editMode;
@@ -250,6 +272,10 @@ public class InstructionCategoriesAdapter extends RecyclerView.Adapter<Instructi
         viewHolders.add(holder);
     }
 
+    /**
+     * returns the size of the ArrayList
+     * @return size of the ArrayList
+     */
     @Override
     public int getItemCount() {
         return categoryList.size();

@@ -17,13 +17,11 @@ import android.content.res.Resources;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.Matrix;
-import android.media.ExifInterface;
 import android.net.Uri;
 import android.preference.PreferenceManager;
 import android.provider.MediaStore;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.util.Log;
 
 import com.example.householdhelper.R;
 import android.os.Bundle;
@@ -46,17 +44,20 @@ import com.example.householdhelper.helpers.Table;
 import org.jetbrains.annotations.NotNull;
 
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 
+/**
+ * The activity for viewing a recipe.
+ *
+ * @author Bryan Burdick
+ * @version 1.0
+ * @since 2021-02-06
+ */
 public class RecipeActivity extends AppCompatActivity implements IngredientCategoriesAdapter.DeleteListener {
 
-    public static final String TAG = "RecipeActivity";
     public static final int PICK_IMAGE = 1;
-
 
     public String recipeId, recipeName, dateCreated, lastMade, author, newRecipeName, newAuthor, imageLink, shoppingListId;
     public String[] ingredientCategories, instructionCategories;
@@ -119,6 +120,10 @@ public class RecipeActivity extends AppCompatActivity implements IngredientCateg
         }
     }
 
+    /**
+     * Initializes variables from database.
+     *
+     */
     private void setVariablesFromDatabase() {
         if (!recipeId.isEmpty() && !recipeId.equals("-1")) {
             Cursor ret = db.getRecipeById(recipeId);
@@ -160,7 +165,7 @@ public class RecipeActivity extends AppCompatActivity implements IngredientCateg
                             }
                         }
 
-                        copyArrayListInstruction(instructionCategoriesList, backupInstructionCategoriesList);
+                        copyArrayListInstruction(instructionCategoriesList);
 
                     }while(listRet.moveToNext());
 
@@ -211,7 +216,7 @@ public class RecipeActivity extends AppCompatActivity implements IngredientCateg
                             }
                         }
 
-                        copyArrayListIngredient(ingredientCategoriesList, backupIngredientCategoriesList);
+                        copyArrayListIngredient(ingredientCategoriesList);
 
                     }while(listRet2.moveToNext());
 
@@ -236,6 +241,9 @@ public class RecipeActivity extends AppCompatActivity implements IngredientCateg
         inShopList = db.listContainsRecipe(recipeId);
     }
 
+    /**
+     * Initializes all views in layout. Also most onclicks are defined here
+     */
     private void initializeViews() {
 
         rotateImageButton = findViewById(R.id.rotateImageButton);
@@ -499,6 +507,9 @@ public class RecipeActivity extends AppCompatActivity implements IngredientCateg
         toggleTextVisibility(editMode);
     }
 
+    /**
+     * passes the layoutManager, adapter, and ArrayList to the recyclerview
+     */
     public void startRecyclerView(){
         ingredientCategoriesRecyclerView = findViewById(R.id.ingredientCategoriesRecyclerView);
         ingredientCategoriesLayoutManager = new LinearLayoutManager(this) {
@@ -603,6 +614,9 @@ public class RecipeActivity extends AppCompatActivity implements IngredientCateg
 
     }
 
+    /**
+     * formats the text for the author field depending on whether it is in edit mode or not
+     */
     private void setAuthor() {
         if(!editMode){
             authorTextView.setText("Author: " + author);
@@ -611,6 +625,9 @@ public class RecipeActivity extends AppCompatActivity implements IngredientCateg
         }
     }
 
+    /**
+     * formats the text for the servings field depending on whether it is in edit mode or not
+     */
     private void setServings() {
         if(!editMode){
             servingsTextView.setText("Servings: " + servings);
@@ -619,6 +636,9 @@ public class RecipeActivity extends AppCompatActivity implements IngredientCateg
         }
     }
 
+    /**
+     * calculates total cook time and formats text for time fields
+     */
     private void setCookTimes() {
         if(!editMode){
             prepTimeTextView.setText("Prep Time: " + getCookTimeString(prepTime));
@@ -632,6 +652,11 @@ public class RecipeActivity extends AppCompatActivity implements IngredientCateg
 
     }
 
+    /**
+     * Converts minutes to a String in the format (X hours and Y minutes)
+     * @param initialTime time in minutes
+     * @return the new formatted time
+     */
     private String getCookTimeString(int initialTime){
         String ret = "";
         int hours = initialTime / 60;
@@ -664,6 +689,9 @@ public class RecipeActivity extends AppCompatActivity implements IngredientCateg
         return ret;
     }
 
+    /**
+     * toggles whether editable elements should be visible or not
+     */
     private void toggleEditMode() {
         editMode = !editMode;
 
@@ -747,6 +775,10 @@ public class RecipeActivity extends AppCompatActivity implements IngredientCateg
         toggleTextVisibility(editMode);
     }
 
+    /**
+     * sets edit text visibility based on edit mode status
+     * @param editMode current status of edit mode
+     */
     private void toggleTextVisibility(boolean editMode){
         if(editMode){
             recipeTitleTextView.setVisibility(View.INVISIBLE);
@@ -773,6 +805,9 @@ public class RecipeActivity extends AppCompatActivity implements IngredientCateg
         }
     }
 
+    /**
+     *
+     */
     private void handleSaveChanges() {
 
         if(newRecipeName.isEmpty()){
@@ -784,21 +819,29 @@ public class RecipeActivity extends AppCompatActivity implements IngredientCateg
         }
     }
 
+    /**
+     * checks if there are unsaved changes
+     * @return true if unsaved changes
+     */
     private boolean checkUnsavedChanges() {
         if(!recipeName.equals(newRecipeName) || prepTime != newPrepTime || cookTime != newCookTime || !author.equals(newAuthor)){
             return true;
         }
 
-        if(!checkArrayListEqual(ingredientCategoriesList, backupIngredientCategoriesList)){
-            return true;
-        }
-        return false;
+        return !checkArrayListEqual(ingredientCategoriesList, backupIngredientCategoriesList);
     }
 
+    /**
+     * checks if data can be inserted safely into the database
+     * @return validity of changes
+     */
     private boolean checkValidSaveChanges(){
         return !newRecipeName.isEmpty() && newPrepTime >= 0 && newCookTime >= 0;
     }
 
+    /**
+     * handles inserting or updating database items
+     */
     private void saveChanges(){
         recipeName = newRecipeName;
 
@@ -838,8 +881,8 @@ public class RecipeActivity extends AppCompatActivity implements IngredientCateg
         saveAllIngredients();
         saveAllInstructions();
 
-        copyArrayListIngredient(ingredientCategoriesList, backupIngredientCategoriesList);
-        copyArrayListInstruction(instructionCategoriesList, backupInstructionCategoriesList);
+        copyArrayListIngredient(ingredientCategoriesList);
+        copyArrayListInstruction(instructionCategoriesList);
 
         if(recipeId.equals("-1")){
             Toast.makeText(this, "Something you entered can't be submitted", Toast.LENGTH_SHORT).show();
@@ -849,6 +892,10 @@ public class RecipeActivity extends AppCompatActivity implements IngredientCateg
 
     }
 
+    /**
+     * iterates through ingredient categories arraylist and returns their names as a single string delineated with a [`]
+     * @return categories as a delineated string
+     */
     private String getIngredientCategoriesAsString() {
         String ret = "";
         for(int i = 0; i < ingredientCategoriesList.size(); i++){
@@ -862,6 +909,10 @@ public class RecipeActivity extends AppCompatActivity implements IngredientCateg
         return ret;
     }
 
+    /**
+     * iterates through instruction categories arraylist and returns their names as a single string delineated with a [`]
+     * @return categories as a delineated string
+     */
     private String getInstructionCategoriesAsString() {
         String ret = "";
         for(int i = 0; i < instructionCategoriesList.size(); i++){
@@ -875,6 +926,9 @@ public class RecipeActivity extends AppCompatActivity implements IngredientCateg
         return ret;
     }
 
+    /**
+     * inserts or updates all ingredients to the database
+     */
     private void saveAllIngredients(){
         for(int i = 0; i < ingredientCategoriesList.size(); i++){
             IngredientCategory currentCategory = ingredientCategoriesList.get(i);
@@ -904,6 +958,9 @@ public class RecipeActivity extends AppCompatActivity implements IngredientCateg
         }
     }
 
+    /**
+     * inserts or updates all instructions to the database
+     */
     private void saveAllInstructions(){
         for(int i = 0; i < instructionCategoriesList.size(); i++){
             InstructionCategory currentCategory = instructionCategoriesList.get(i);
@@ -918,6 +975,10 @@ public class RecipeActivity extends AppCompatActivity implements IngredientCateg
         }
     }
 
+    /**
+     * saves a bitmap to local storage and stores the link
+     * @param bitmap
+     */
     private void saveImage(Bitmap bitmap) {
 
         ActivityCompat.requestPermissions(RecipeActivity.this, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, 1);
@@ -957,6 +1018,10 @@ public class RecipeActivity extends AppCompatActivity implements IngredientCateg
         }
     }
 
+    /**
+     * sets the recipe image based on a given Uri
+     * @param uri the link to the image
+     */
     private void setImage(String uri) {
         try{
             imageLink = uri;
@@ -973,12 +1038,22 @@ public class RecipeActivity extends AppCompatActivity implements IngredientCateg
         }
     }
 
+    /**
+     * rotates a bitmap to a given orientation
+     * @param bitmap the bitmap to rotate
+     * @param rotation the new orientation
+     */
     private void rotateImage(Bitmap bitmap, int rotation) {
         recipePicture.setImageBitmap(rotateBitmap(bitmap, rotation));
     }
 
-    private void copyArrayListIngredient(@NotNull ArrayList<IngredientCategory> list1, ArrayList<IngredientCategory> list2){
-        list2 = new ArrayList<>();
+    /**
+     * copies an arraylist to compare changes against
+     * @param list1 the list to copy from
+     *
+     */
+    private void copyArrayListIngredient(@NotNull ArrayList<IngredientCategory> list1){
+        ArrayList<IngredientCategory> list2 = new ArrayList<>();
         for(int i = 0; i < list1.size(); i++){
             IngredientCategory currentCategory = list1.get(i);
             list2.add(new IngredientCategory(currentCategory.getId(), currentCategory.getName(), new ArrayList<>()));
@@ -999,8 +1074,13 @@ public class RecipeActivity extends AppCompatActivity implements IngredientCateg
         }
     }
 
-    private void copyArrayListInstruction(@NotNull ArrayList<InstructionCategory> list1, ArrayList<InstructionCategory> list2){
-        list2 = new ArrayList<>();
+    /**
+     * copies an arraylist to compare changes against
+     * @param list1 the list to copy from
+     *
+     */
+    private void copyArrayListInstruction(@NotNull ArrayList<InstructionCategory> list1){
+        ArrayList<InstructionCategory> list2 = new ArrayList<>();
         for(int i = 0; i < list1.size(); i++){
             InstructionCategory currentCategory = list1.get(i);
             list2.add(new InstructionCategory(currentCategory.getId(), currentCategory.getName(), new ArrayList<>()));
@@ -1012,6 +1092,12 @@ public class RecipeActivity extends AppCompatActivity implements IngredientCateg
         }
     }
 
+    /**
+     * compares all elements in two arraylists to see if they contain the exact same data
+     * @param list1 the first list to compare
+     * @param list2 the second list to compare
+     * @return if lists contain identical data
+     */
     private boolean checkArrayListEqual(@NotNull ArrayList<IngredientCategory> list1, @NotNull ArrayList<IngredientCategory> list2){
         if(list1.size() != list2.size()){
             return false;
@@ -1039,6 +1125,9 @@ public class RecipeActivity extends AppCompatActivity implements IngredientCateg
         return true;
     }
 
+    /**
+     * determines whether items should be added to or removed from shopping list
+     */
     public void handleAddShopListClick(){
         if(!inShopList){
             addToShoppingList();
@@ -1051,10 +1140,16 @@ public class RecipeActivity extends AppCompatActivity implements IngredientCateg
         }
     }
 
+    /**
+     * removes recipe items from shopping list
+     */
     public void removeFromShoppingList(){
         db.deleteListItemByRecipeId(recipeId);
     }
 
+    /**
+     * inserts recipe items to shopping list
+     */
     public void addToShoppingList(){
         ArrayList<String> itemsAlreadyInserted = new ArrayList<>();
 
@@ -1153,6 +1248,12 @@ public class RecipeActivity extends AppCompatActivity implements IngredientCateg
         }
     }
 
+    /**
+     * rotates a bitmap
+     * @param bitmap the bitmap to rotate
+     * @param degrees the new orientation
+     * @return the rotated bitmap
+     */
     public static Bitmap rotateBitmap(Bitmap bitmap, int degrees) {
         Matrix matrix = new Matrix();
         matrix.postRotate(degrees);
@@ -1171,6 +1272,10 @@ public class RecipeActivity extends AppCompatActivity implements IngredientCateg
     public void deleteSwipe(String id) {
     }
 
+    /**
+     * Chooses the theme based on the one selected in sharedpreferences, or default if none is selected
+     * @return the selected theme
+     */
     @Override
     public Resources.Theme getTheme(){
         Resources.Theme theme = super.getTheme();

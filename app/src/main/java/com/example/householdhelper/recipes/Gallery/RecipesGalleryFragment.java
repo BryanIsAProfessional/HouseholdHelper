@@ -26,14 +26,13 @@ import com.example.householdhelper.recipes.RecipesActivity;
 import java.util.ArrayList;
 
 /**
- * A simple {@link Fragment} subclass.
- * Use the {@link RecipesGalleryFragment#newInstance} factory method to
- * create an instance of this fragment.
+ * The fragment for viewing recipes with images. Recipes without images are not displayed.
+ *
+ * @author Bryan Burdick
+ * @version 1.0
+ * @since 2021-02-06
  */
 public class RecipesGalleryFragment extends Fragment{
-
-    // the fragment initialization parameters
-    private static final String TAG = "RecipesGalleryFragment";
 
     public ArrayList<Recipe> list;
 
@@ -71,6 +70,9 @@ public class RecipesGalleryFragment extends Fragment{
         return inflater.inflate(R.layout.fragment_recipe_gallery, container, false);
     }
 
+    /**
+     * passes the layoutManager, adapter, and ArrayList to the recyclerview
+     */
     public void startRecyclerView(){
         recyclerView = getView().findViewById(R.id.recipesRecyclerView);
         layoutManager = new LinearLayoutManager(getContext());
@@ -82,18 +84,6 @@ public class RecipesGalleryFragment extends Fragment{
         });
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setAdapter(adapter);
-    }
-
-    public String printArrayList(ArrayList<Recipe> l){
-        String ret = "[ ";
-        for (int i = 0; i < l.size(); i++){
-            if(i > 0){
-                ret += ", ";
-            }
-            ret += l.get(i).getName();
-        }
-        ret += " ]";
-        return ret;
     }
 
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
@@ -109,6 +99,9 @@ public class RecipesGalleryFragment extends Fragment{
         startRecyclerView();
     }
 
+    /**
+     * refreshes recyclerview content when resuming
+     */
     @Override
     public void onResume() {
         super.onResume();
@@ -122,5 +115,4 @@ public class RecipesGalleryFragment extends Fragment{
         }
         startRecyclerView();
     }
-
 }

@@ -21,9 +21,16 @@ import com.example.householdhelper.helpers.DatabaseHelper;
 
 import java.util.ArrayList;
 
+/**
+ * The fragment for viewing quick add items. Handles retrieving items from
+ * database and displaying them in a recyclerview, and inserting/removing items
+ * from the active list when items are clicked.
+ *
+ * @author Bryan Burdick
+ * @version 1.0
+ * @since 2021-02-06
+ */
 public class QuickAddFragment extends Fragment implements QuickAddAdapter.OnItemClickListener {
-
-    private static final String TAG = "QuickAddFragment";
 
     public String listId;
 
@@ -45,6 +52,9 @@ public class QuickAddFragment extends Fragment implements QuickAddAdapter.OnItem
         return inflater.inflate(R.layout.fragment_quickadd, container, false);
     }
 
+    /**
+     * retrieves list items from database and stores them in an ArrayList<QuickAddItem>
+     */
     public void initializeArrayList(){
         Cursor ret = db.getAllQuickAddItems();
         if(ret.moveToFirst()){
@@ -55,23 +65,25 @@ public class QuickAddFragment extends Fragment implements QuickAddAdapter.OnItem
 
             }while(ret.moveToNext());
         }
-        printArrayList(list);
     }
 
+    /**
+     * passes the layoutManager, adapter, and ArrayList to the recyclerview
+     */
     public void startRecyclerView(){
         recyclerView = getView().findViewById(R.id.quickAddRecyclerView);
         layoutManager = new LinearLayoutManager(getContext());
         adapter = new QuickAddAdapter(list, listId, getContext());
         recyclerView.setLayoutManager(layoutManager);
-        adapter.setOnItemClickListener(new QuickAddAdapter.OnItemClickListener(){
-            @Override
-            public void onItemLongClick(int position) {
-                onQuickAddItemLongClicked(position);
-            }
-        });
+        adapter.setOnItemClickListener(position -> onQuickAddItemLongClicked(position));
         recyclerView.setAdapter(adapter);
     }
 
+    /**
+     * opens a yes/no dialog if a quick add item is long clicked. Calls to remove the item from the database
+     * and the recyclerview if yes.
+     * @param position the position of the item in the Recyclerview adapter
+     */
     private void onQuickAddItemLongClicked(int position){
 
         // dialog popup to delete quick add item
@@ -90,22 +102,14 @@ public class QuickAddFragment extends Fragment implements QuickAddAdapter.OnItem
 
     }
 
+    /**
+     * Removes the item at index from the database and recyclerview.
+     * @param position the index of the item to remove
+     */
     private void handleDeleteQuickAddItem(int position){
         db.deleteQuickAddItemById(list.get(position).getId());
         list.remove(position);
         adapter.notifyDataSetChanged();
-    }
-
-    public String printArrayList(ArrayList<QuickAddItem> l){
-        String ret = "[ ";
-        for (int i = 0; i < l.size(); i++){
-            if(i > 0){
-                ret += ", ";
-            }
-            ret += l.get(i).getName();
-        }
-        ret += " ]";
-        return ret;
     }
 
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {

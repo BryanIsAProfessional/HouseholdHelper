@@ -1,27 +1,25 @@
 package com.example.householdhelper.settings;
 
-import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.Resources;
 import android.os.Bundle;
-import android.util.Log;
 
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.preference.ListPreference;
-import androidx.preference.Preference;
 import androidx.preference.PreferenceFragmentCompat;
-import androidx.preference.PreferenceManager;
-import androidx.preference.PreferenceScreen;
 
 import com.example.householdhelper.R;
 
-import java.util.List;
-
+/**
+ * The activity for setting preferences.
+ *
+ * @author Bryan Burdick
+ * @version 1.0
+ * @since 2021-02-06
+ */
 public class SettingsActivity extends AppCompatActivity {
-
-    public static final String TAG = "SettingsActivity";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,10 +44,10 @@ public class SettingsActivity extends AppCompatActivity {
             loadSettings();
         }
 
+        /**
+         * load settings from sharedpreferences
+         */
         private void loadSettings(){
-
-
-
             ListPreference listPreference = findPreference("Themes");
             SharedPreferences preferences = android.preference.PreferenceManager.getDefaultSharedPreferences(getContext());
             String themeName = preferences.getString("theme", "Default");
@@ -77,6 +75,9 @@ public class SettingsActivity extends AppCompatActivity {
 
         }
 
+        /**
+         * reloads settings on resume
+         */
         @Override
         public void onResume() {
             super.onResume();
@@ -84,6 +85,10 @@ public class SettingsActivity extends AppCompatActivity {
         }
     }
 
+    /**
+     * Chooses the theme based on the one selected in sharedpreferences, or default if none is selected
+     * @return the selected theme
+     */
     @Override
     public Resources.Theme getTheme(){
         Resources.Theme theme = super.getTheme();

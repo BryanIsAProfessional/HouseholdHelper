@@ -26,9 +26,15 @@ import com.example.householdhelper.R;
 import java.util.ArrayList;
 import java.util.Collections;
 
+/**
+ * The fragment for viewing a single list. Handles retrieving list items from
+ * database and displaying them in a recyclerview.
+ *
+ * @author Bryan Burdick
+ * @version 1.0
+ * @since 2021-02-06
+ */
 public class ListFragment extends Fragment {
-
-    private static final String TAG = "ListFragment";
 
     public String listId;
 
@@ -58,6 +64,9 @@ public class ListFragment extends Fragment {
         return inflater.inflate(R.layout.fragment_list, container, false);
     }
 
+    /**
+     * instantiates all declared views and sets onclick listeners
+     */
     private void attachButtons() {
         batchAddLayout = getView().findViewById(R.id.batchAddLayout);
         newItemCheckBox = getView().findViewById(R.id.newItemCheckBox);
@@ -126,6 +135,9 @@ public class ListFragment extends Fragment {
         });
     }
 
+    /**
+     * retrieves list items from database and stores them in an ArrayList<ListItem>
+     */
     public void initializeArrayList(){
         Cursor ret = db.getListItems(listId);
         if(ret.moveToFirst()){
@@ -137,6 +149,9 @@ public class ListFragment extends Fragment {
         }
     }
 
+    /**
+     * passes the layoutManager, adapter, and ArrayList to the recyclerview
+     */
     public void startRecyclerView(){
         recyclerView = getView().findViewById(R.id.listRecyclerView);
         layoutManager = new LinearLayoutManager(getContext()) {
@@ -163,18 +178,6 @@ public class ListFragment extends Fragment {
         });
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setAdapter(adapter);
-    }
-
-    public String printArrayList(ArrayList<ListItem> l){
-        String ret = "[ ";
-        for (int i = 0; i < l.size(); i++){
-            if(i > 0){
-                ret += ", ";
-            }
-            ret += l.get(i).getName();
-        }
-        ret += " ]";
-        return ret;
     }
 
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {

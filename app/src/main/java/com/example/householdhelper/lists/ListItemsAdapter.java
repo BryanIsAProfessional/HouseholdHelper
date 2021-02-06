@@ -1,9 +1,5 @@
 package com.example.householdhelper.lists;
 
-import android.content.Context;
-import android.graphics.drawable.Drawable;
-import android.graphics.drawable.RotateDrawable;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,12 +14,20 @@ import com.example.householdhelper.R;
 import java.util.ArrayList;
 import java.util.Collections;
 
+/**
+ * Extended RecyclerView Adapter for displaying shopping list items
+ *
+ * @author Bryan Burdick
+ * @version 1.0
+ * @since 2021-02-06
+ */
 public class ListItemsAdapter extends RecyclerView.Adapter<ListItemsAdapter.ListsAdapterViewHolder> {
     private final ArrayList<ListItem> list;
     public ListItemsAdapter.OnItemClickListener listener;
-    public static final String TAG = "ListItemsAdapter";
 
-
+    /**
+     * sorts items in the ArrayList
+     */
     public void sort() {
         Collections.sort(list);
     }
@@ -43,16 +47,29 @@ public class ListItemsAdapter extends RecyclerView.Adapter<ListItemsAdapter.List
         void onItemChecked(boolean checked, int position);
     }
 
+    /**
+     * sets onclicklistener
+     * @param listener the new listener
+     */
     public void setOnItemClickListener(ListItemsAdapter.OnItemClickListener listener){
         this.listener = listener;
     }
 
+    /**
+     * default constructor
+     * @param inList an ArrayList of ListItems
+     */
     public ListItemsAdapter(ArrayList<ListItem> inList){
 
         list = inList;
         Collections.sort(list);
     }
 
+    /**
+     * gets the ListItem at a position
+     * @param position the index of the item in the ArrayList
+     * @return the ListItem at given index
+     */
     public ListItem getItem(int position){
         return list.get(position);
     }
@@ -64,6 +81,11 @@ public class ListItemsAdapter extends RecyclerView.Adapter<ListItemsAdapter.List
         return viewHolder;
     }
 
+    /**
+     * sets values of holder's views to match items in the ArrayList
+     * @param holder current ViewHolder
+     * @param position ViewHolder's index in the ArrayList
+     */
     @Override
     public void onBindViewHolder(@NonNull ListsAdapterViewHolder holder, int position) {
         ListItem currentItem = list.get(holder.getAdapterPosition());
@@ -78,6 +100,10 @@ public class ListItemsAdapter extends RecyclerView.Adapter<ListItemsAdapter.List
         });
     }
 
+    /**
+     * returns the size of the ArrayList
+     * @return size of the ArrayList
+     */
     @Override
     public int getItemCount() {
         return list.size();

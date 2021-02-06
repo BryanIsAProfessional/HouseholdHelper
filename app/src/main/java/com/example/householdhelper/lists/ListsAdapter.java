@@ -2,14 +2,8 @@ package com.example.householdhelper.lists;
 
 import android.content.Context;
 import android.content.SharedPreferences;
-import android.graphics.Color;
-import android.graphics.drawable.Drawable;
-import android.os.Build;
 import android.preference.PreferenceManager;
-import android.util.Log;
-import android.view.DragEvent;
 import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
@@ -18,18 +12,22 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.RequiresApi;
-import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.householdhelper.R;
 
 import java.util.ArrayList;
 
+/**
+ * Extended RecyclerView Adapter for displaying shopping lists (titles not items)
+ *
+ * @author Bryan Burdick
+ * @version 1.0
+ * @since 2021-02-06
+ */
 public class ListsAdapter extends RecyclerView.Adapter<ListsAdapter.ListsAdapterViewHolder> {
     private final ArrayList<List> list;
     public OnItemClickListener listener;
-    public static final String TAG = "ListsAdapter";
     public String shoppingListId, toDoListId;
     public Context context;
 
@@ -39,6 +37,10 @@ public class ListsAdapter extends RecyclerView.Adapter<ListsAdapter.ListsAdapter
         void onDeleteClick(int position);
     }
 
+    /**
+     * sets onclicklistener
+     * @param listener the new listener
+     */
     public void setOnItemClickListener(OnItemClickListener listener){
         this.listener = listener;
     }
@@ -64,6 +66,11 @@ public class ListsAdapter extends RecyclerView.Adapter<ListsAdapter.ListsAdapter
         }
     }
 
+    /**
+     * default constructor
+     * @param inList an ArrayList of Lists
+     * @param context activity context for accessing sharedpreferences
+     */
     public ListsAdapter(ArrayList<List> inList, Context context){
         this.context = context;
         list = inList;
@@ -79,6 +86,11 @@ public class ListsAdapter extends RecyclerView.Adapter<ListsAdapter.ListsAdapter
         return viewHolder;
     }
 
+    /**
+     * sets values of holder's views to match items in the ArrayList
+     * @param holder current ViewHolder
+     * @param position ViewHolder's index in the ArrayList
+     */
     @Override
     public void onBindViewHolder(@NonNull ListsAdapterViewHolder holder, int position) {
         List currentItem = list.get(position);
@@ -89,9 +101,9 @@ public class ListsAdapter extends RecyclerView.Adapter<ListsAdapter.ListsAdapter
         holder.progressBar.setProgress(currentItem.getCompletionPercent());
 
 
-        if(list.get(holder.getAdapterPosition()).getid().equals(toDoListId)){
+        if(list.get(holder.getAdapterPosition()).getId().equals(toDoListId)){
             holder.shopListIndicatorImageView.setVisibility(View.GONE);
-        }else if(list.get(holder.getAdapterPosition()).getid().equals(shoppingListId)){
+        }else if(list.get(holder.getAdapterPosition()).getId().equals(shoppingListId)){
             holder.todoListIndicatorImageView.setVisibility(View.GONE);
         }else{
             holder.shopListIndicatorImageView.setVisibility(View.GONE);
@@ -100,6 +112,10 @@ public class ListsAdapter extends RecyclerView.Adapter<ListsAdapter.ListsAdapter
 
     }
 
+    /**
+     * returns the size of the ArrayList
+     * @return size of the ArrayList
+     */
     @Override
     public int getItemCount() {
         return list.size();

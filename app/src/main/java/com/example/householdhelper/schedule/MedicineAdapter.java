@@ -25,10 +25,16 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 
+/**
+ * Extended RecyclerView Adapter for displaying medicines
+ *
+ * @author Bryan Burdick
+ * @version 1.0
+ * @since 2021-02-06
+ */
 public class MedicineAdapter extends RecyclerView.Adapter<MedicineAdapter.MedicineAdapterViewHolder> {
     private final ArrayList<Boolean> list;
     private final ArrayList<MedicineAdapterViewHolder> viewHolders = new ArrayList<>();
-    public static final String TAG = "MedicineAdapter";
     public static final int MILLIS_PER_DAY = 86400000;
     private final Context context;
     private final DatabaseHelper db;
@@ -36,7 +42,6 @@ public class MedicineAdapter extends RecyclerView.Adapter<MedicineAdapter.Medici
 
 
     public static class MedicineAdapterViewHolder extends RecyclerView.ViewHolder{
-
 
         private final ImageView imageView;
         private boolean isFilled;
@@ -47,6 +52,11 @@ public class MedicineAdapter extends RecyclerView.Adapter<MedicineAdapter.Medici
         }
     }
 
+    /**
+     * default constructor
+     * @param context application context for accessing database
+     * @param medicine Medicine object
+     */
     public MedicineAdapter(Context context, Medicine medicine){
         this.context = context;
         this.medicine = medicine;
@@ -59,7 +69,10 @@ public class MedicineAdapter extends RecyclerView.Adapter<MedicineAdapter.Medici
             list.add(false);
         }
     }
-    
+
+    /**
+     * restores a dose to current prescription
+     */
     public void restorePill(){
         boolean isRestored = false;
         for(int i = 0; !isRestored & i < list.size(); i++){
@@ -80,6 +93,10 @@ public class MedicineAdapter extends RecyclerView.Adapter<MedicineAdapter.Medici
         }
     }
 
+    /**
+     * Returns the number of doses remaining
+     * @return the number of doses remaining
+     */
     public int getRemaining(){
         int count = 0;
         for(int i = 0; i < list.size(); i++){
@@ -90,6 +107,9 @@ public class MedicineAdapter extends RecyclerView.Adapter<MedicineAdapter.Medici
         return count;
     }
 
+    /**
+     * removes a dose from current prescription
+     */
     public void usePill(){
         boolean isUsed = false;
         for(int i = (list.size()-1); !isUsed & i >= 0; i--){
@@ -109,6 +129,9 @@ public class MedicineAdapter extends RecyclerView.Adapter<MedicineAdapter.Medici
         }
     }
 
+    /**
+     * gathers information to schedule a notification, if tracked automatically
+     */
     public void handleScheduleNotification() {
         if(this.medicine.getAutomatic()){
             Date date = new Date();
@@ -133,7 +156,13 @@ public class MedicineAdapter extends RecyclerView.Adapter<MedicineAdapter.Medici
         }
     }
 
-
+    /**
+     * Schedules a notification for a specific time
+     * @param notificationId notification id
+     * @param title notification title
+     * @param message notification message
+     * @param reminderTime time to schedule notification at
+     */
     private void scheduleNotification(int notificationId, String title, String message, Calendar reminderTime){
         Intent intent = new Intent(context, AlarmReceiver.class);
         intent.putExtra("notificationId", notificationId);
@@ -157,6 +186,11 @@ public class MedicineAdapter extends RecyclerView.Adapter<MedicineAdapter.Medici
         return viewHolder;
     }
 
+    /**
+     * sets values of holder's views to match items in the ArrayList
+     * @param holder current ViewHolder
+     * @param position ViewHolder's index in the ArrayList
+     */
     @Override
     public void onBindViewHolder(@NonNull MedicineAdapterViewHolder holder, int position) {
         holder.isFilled = list.get(position);
@@ -170,6 +204,10 @@ public class MedicineAdapter extends RecyclerView.Adapter<MedicineAdapter.Medici
         viewHolders.add(holder);
     }
 
+    /**
+     * returns the size of the ArrayList
+     * @return size of the ArrayList
+     */
     @Override
     public int getItemCount() {
         return list.size();

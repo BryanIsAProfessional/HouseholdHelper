@@ -20,12 +20,22 @@ import com.example.householdhelper.R;
 
 import java.util.ArrayList;
 
+/**
+ * Extended RecyclerView Adapter for displaying instructions
+ *
+ * @author Bryan Burdick
+ * @version 1.0
+ * @since 2021-02-06
+ */
 public class InstructionsAdapter extends RecyclerView.Adapter<InstructionsAdapter.InstructionsAdapterViewHolder> {
     private final ArrayList<Instruction> list;
     public boolean editMode;
     private final ArrayList <InstructionsAdapter.InstructionsAdapterViewHolder> viewHolders = new ArrayList<>();
-    public static final String TAG = "InstructionsAdapter";
 
+    /**
+     * Toggles whether text should be editable or not
+     * @param editMode the new state for text editability
+     */
     public void setEditMode(boolean editMode){
         this.editMode = editMode;
         InstructionsAdapter.InstructionsAdapterViewHolder holder;
@@ -57,6 +67,10 @@ public class InstructionsAdapter extends RecyclerView.Adapter<InstructionsAdapte
         }
     }
 
+    /**
+     * default constructor
+     * @param inList ArrayList of Instructions
+     */
     public InstructionsAdapter(ArrayList<Instruction> inList){
         list = inList;
     }
@@ -69,6 +83,11 @@ public class InstructionsAdapter extends RecyclerView.Adapter<InstructionsAdapte
         return viewHolder;
     }
 
+    /**
+     * sets values of holder's views to match items in the ArrayList
+     * @param holder current ViewHolder
+     * @param position ViewHolder's index in the ArrayList
+     */
     @Override
     public void onBindViewHolder(@NonNull InstructionsAdapterViewHolder holder, int position) {
         holder.editMode = editMode;
@@ -121,6 +140,10 @@ public class InstructionsAdapter extends RecyclerView.Adapter<InstructionsAdapte
         viewHolders.add(holder);
     }
 
+    /**
+     * returns the size of the ArrayList
+     * @return size of the ArrayList
+     */
     @Override
     public int getItemCount() {
         return list.size();

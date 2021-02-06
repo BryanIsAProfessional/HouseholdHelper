@@ -34,7 +34,6 @@ import java.util.Date;
 
 public class ScheduleActivity extends AppCompatActivity implements NewMedDialog.NewMedDialogListener {
 
-    public static final String TAG = "ScheduleActivity";
     public static final int MILLIS_PER_DAY = 86400000;
     private DatabaseHelper db;
 
@@ -47,6 +46,13 @@ public class ScheduleActivity extends AppCompatActivity implements NewMedDialog.
         db = new DatabaseHelper(this);
     }
 
+    /**
+     * schedules a notification at a specific time
+     * @param notificationId notification id
+     * @param title notification title
+     * @param message notification message
+     * @param reminderTime date that message should be scheduled
+     */
     private void scheduleNotification(int notificationId, String title, String message, Calendar reminderTime){
         Intent intent = new Intent(ScheduleActivity.this, AlarmReceiver.class);
         intent.putExtra("notificationId", notificationId);
@@ -56,13 +62,14 @@ public class ScheduleActivity extends AppCompatActivity implements NewMedDialog.
         PendingIntent alarmIntent = PendingIntent.getBroadcast(ScheduleActivity.this, 0, intent, PendingIntent.FLAG_CANCEL_CURRENT);
 
         AlarmManager alarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
-//        Calendar startTime = Calendar.getInstance();
-//        startTime.setTime(reminderTime);
         long alarmStartTime = reminderTime.getTimeInMillis();
 
         alarmManager.set(AlarmManager.RTC_WAKEUP, alarmStartTime, alarmIntent);
     }
 
+    /**
+     * opens a dialog to get user data
+     */
     private void openNewMedDialog() {
         NewMedDialog newMedDialog = new NewMedDialog();
         newMedDialog.show(getSupportFragmentManager(), "Track a new medication");
@@ -86,6 +93,10 @@ public class ScheduleActivity extends AppCompatActivity implements NewMedDialog.
         }
     }
 
+    /**
+     * Chooses the theme based on the one selected in sharedpreferences, or default if none is selected
+     * @return the selected theme
+     */
     @Override
     public Resources.Theme getTheme(){
         Resources.Theme theme = super.getTheme();
@@ -108,6 +119,16 @@ public class ScheduleActivity extends AppCompatActivity implements NewMedDialog.
         return theme;
     }
 
+    /**
+     * inserts a medication into the database and schedules a notification if tracked automatically
+     * @param name medication name
+     * @param remaining doses remaining
+     * @param total total doses in prescription
+     * @param hoursBetween hours between doses
+     * @param automatic tracked automatically
+     * @param notifyAt time of day to schedule notifications
+     * @param daysInAdvance days in advance to schedule notification before running out
+     */
     @Override
     public void trackNewMed(String name, int remaining, int total, int hoursBetween, boolean automatic, String notifyAt, int daysInAdvance) {
         db.insertMeds(name, remaining, total, hoursBetween, automatic, notifyAt, daysInAdvance);
