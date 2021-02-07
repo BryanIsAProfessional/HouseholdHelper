@@ -83,7 +83,7 @@ Household Helper will be up on google play soon but you can download it from her
 
 ### Installation
 
-1.  [Download the APK](https://github.com/BryanIsAProfessional/HouseholdHelper/releases/download/alpha/HouseholdHelper.apk)
+1.  [Join the Open Beta](https://play.google.com/apps/testing/hh.householdhelper) or [Download the APK](https://github.com/BryanIsAProfessional/HouseholdHelper/releases/download/alpha/HouseholdHelper.apk)
    ```sh
    Transfer the file to your phone
    ```
