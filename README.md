@@ -54,10 +54,7 @@
       <a href="#about-the-project">About The Project</a>
     </li>
     <li>
-      <a href="#getting-started">Getting Started</a>
-      <ul>
-        <li><a href="#installation">Installation</a></li>
-      </ul>
+      <a href="#installation">Installation</a>
     </li>
     <li><a href="#usage">Usage</a></li>
     <li><a href="#roadmap">Roadmap</a></li>
@@ -76,14 +73,10 @@
 This app is a collection of tools that I use to make errands and meal planning easier.
 
 
-<!-- GETTING STARTED -->
-## Getting Started
-
-Household Helper will be up on google play soon but you can download it from here as well.
 
 ### Installation
 
-1.  [Join the Open Beta](https://play.google.com/apps/testing/hh.householdhelper) or [Download the APK](https://github.com/BryanIsAProfessional/HouseholdHelper/releases/download/alpha/HouseholdHelper.apk)
+1.  Get it on the [Google Play store](https://play.google.com/store/apps/details?id=hh.householdhelper) or [Download the APK](https://github.com/BryanIsAProfessional/HouseholdHelper/releases/download/alpha/HouseholdHelper.apk)
    ```sh
    Transfer the file to your phone
    ```
